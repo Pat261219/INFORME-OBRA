@@ -20,18 +20,18 @@ textarea{min-height:75px;resize:vertical}label{display:block;font-weight:600;fon
 .grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}.full{grid-column:1/-1}
 h2{font-size:19px;margin:0 0 12px;color:var(--navy)}h3{font-size:16px;color:var(--navy);margin:14px 0 6px;border-bottom:1px dashed var(--line);padding-bottom:4px}
 .item{border-top:1px solid var(--line);padding:12px 0}.item:first-of-type{border-top:0}
-.photos{display:flex;gap:8px;flex-wrap:wrap;margin-top:8px}
-.photo-card{position:relative;width:120px;height:90px;border:1px solid var(--line);border-radius:6px;overflow:hidden;background:#000}
+.photos{display:flex;gap:6px;flex-wrap:wrap;margin-top:6px}
+.photo-card{position:relative;width:100px;height:75px;border:1px solid var(--line);border-radius:5px;overflow:hidden;background:#000}
 .photos img{width:100%;height:100%;object-fit:cover}
-.photo-card button{position:absolute;top:2px;right:2px;background:rgba(167,53,53,0.9);color:white;border:0;border-radius:4px;padding:2px 5px;font-size:10px;cursor:pointer}
+.photo-card button{position:absolute;top:1px;right:1px;background:rgba(167,53,53,0.9);color:white;border:0;border-radius:3px;padding:1px 4px;font-size:9px;cursor:pointer}
 .doc-list{margin-top:8px;font-size:13px}.doc-item{display:flex;align-items:center;gap:8px;padding:6px;background:#f8fafc;border:1px solid var(--line);border-radius:6px;margin-bottom:4px}
 .small{font-size:12px;color:var(--muted)}.hidden{display:none!important}
 #savedList button{margin:4px}.status{font-size:12px;color:var(--green);font-weight:bold}
 .card-row{background:#fafbfc;border:1px solid var(--line);border-radius:8px;padding:12px;margin-bottom:12px}
 .gps-line{display:flex;gap:8px;align-items:end;flex-wrap:wrap}.gps-line>div{flex:1;min-width:140px}.gps-line button{white-space:nowrap}
-.check-item-box{border-top:1px solid var(--line);padding:10px 0}
+.check-item-box{border-top:1px solid var(--line);padding:12px 0}
 .check-item-box:first-of-type{border-top:0}
-.check-main-row{display:grid;grid-template-columns:1.2fr 160px 1.5fr;gap:10px;align-items:center}
+.check-main-row{display:grid;grid-template-columns:1.4fr 150px 1.8fr;gap:10px;align-items:center}
 .check-item-box label{margin:0}
 a{color:var(--blue)}
 @media(max-width:760px){.check-main-row{grid-template-columns:1fr}}
@@ -40,7 +40,7 @@ a{color:var(--blue)}
  body{background:white;font-size:11px}header{padding:12px;color:#000;background:white;border-bottom:2px solid #15324b}header p{color:#333}
  main{max-width:none;margin:0;padding:0}.toolbar,.no-print,.removePhoto,.btn-del{display:none!important}
  .panel{border:0;padding:6px;margin:0;break-inside:auto}.item,.card-row,.check-item-box{break-inside:avoid}
- .photo-card{width:140px;height:105px;border:1px solid #ccc}
+ .photo-card{width:120px;height:90px;border:1px solid #ccc}
  input,select,textarea{border:0;padding:2px 0;appearance:none;font-size:11px}
  textarea{min-height:25px}h2,h3{break-after:avoid}a{color:#000;text-decoration:none}
 }
@@ -89,25 +89,25 @@ a{color:var(--blue)}
 <!-- 3. MEDIOS DE TRABAJO -->
 <section class="panel"><h2>3. Medios de trabajo</h2><div id="mediosChecks"></div>
 <div id="customMedios"></div>
-<button type="button" class="secondary no-print" style="margin-top:10px;" onclick="addCustomItem('customMedios','Medio de trabajo','med_custom')">+ Añadir otro medio de trabajo</button>
+<button type="button" class="secondary no-print" style="margin-top:10px;" onclick="addCustomItem('customMedios','Medio de trabajo')">+ Añadir otro medio de trabajo</button>
 </section>
 
 <!-- 4. INSTALACIONES AUXILIARES -->
 <section class="panel"><h2>4. Instalaciones auxiliares</h2><div id="auxChecks"></div>
 <div id="customAux"></div>
-<button type="button" class="secondary no-print" style="margin-top:10px;" onclick="addCustomItem('customAux','Instalación auxiliar','aux_custom')">+ Añadir otra instalación auxiliar</button>
+<button type="button" class="secondary no-print" style="margin-top:10px;" onclick="addCustomItem('customAux','Instalación auxiliar')">+ Añadir otra instalación auxiliar</button>
 </section>
 
 <!-- 5. MAQUINARIA AUXILIAR -->
 <section class="panel"><h2>5. Maquinaria auxiliar</h2><div id="maqAuxChecks"></div>
 <div id="customMaqAux"></div>
-<button type="button" class="secondary no-print" style="margin-top:10px;" onclick="addCustomItem('customMaqAux','Maquinaria auxiliar','maux_custom')">+ Añadir otra maquinaria auxiliar</button>
+<button type="button" class="secondary no-print" style="margin-top:10px;" onclick="addCustomItem('customMaqAux','Maquinaria auxiliar')">+ Añadir otra maquinaria auxiliar</button>
 </section>
 
 <!-- 6. PEQUEÑA MAQUINARIA -->
 <section class="panel"><h2>6. Pequeña maquinaria y herramientas forestales</h2><div id="peqMaqChecks"></div>
 <div id="customPeqMaq"></div>
-<button type="button" class="secondary no-print" style="margin-top:10px;" onclick="addCustomItem('customPeqMaq','Pequeña maquinaria','pmaq_custom')">+ Añadir otra pequeña maquinaria</button>
+<button type="button" class="secondary no-print" style="margin-top:10px;" onclick="addCustomItem('customPeqMaq','Pequeña maquinaria')">+ Añadir otra pequeña maquinaria</button>
 </section>
 
 <!-- 7. MAQUINARIA AUTOPROPULSADA -->
@@ -159,9 +159,9 @@ function buildChecks(id,items,prefix){
         <select name="${prefix}_${i}_estado"><option value="">Seleccionar</option><option>CORRECTO</option><option>MEJORABLE</option><option>DEFICIENTE</option><option>NO APLICA</option></select>
         <input name="${prefix}_${i}_obs" placeholder="Observaciones / detalles">
       </div>
-      <div style="margin-top:6px;display:flex;align-items:center;gap:10px;flex-wrap:wrap;">
+      <div style="margin-top:8px;display:flex;align-items:center;gap:10px;flex-wrap:wrap;">
         <input class="no-print" type="file" accept="image/*" multiple style="max-width:260px;padding:4px;font-size:12px;" onchange="addPhotos(this, '${prefix}_${i}_photos')">
-        <span class="small no-print">Adjuntar fotos de este ítem</span>
+        <span class="small no-print">📷 Adjuntar fotos de este ítem</span>
       </div>
       <div class="photos" id="${prefix}_${i}_photos"></div>
     `;
@@ -174,21 +174,21 @@ buildChecks('auxChecks',auxItems,'aux');
 buildChecks('maqAuxChecks',maqAuxItems,'maux');
 buildChecks('peqMaqChecks',peqMaqItems,'pmaq');
 
-function addCustomItem(containerId,title,prefix){
+function addCustomItem(containerId,title){
   const box=document.getElementById(containerId);
-  const rnd=Math.random().toString(36.substring(2,7));
+  const rnd=Math.random().toString(36).substring(2,7);
   const itemBox=document.createElement('div');
   itemBox.className='check-item-box custom-check-row';
   itemBox.innerHTML=`
-    <div style="display:grid;grid-template-columns:1fr 140px 1.5fr auto;gap:10px;align-items:center;">
+    <div style="display:grid;grid-template-columns:1fr 150px 1.8fr auto;gap:10px;align-items:center;">
       <input placeholder="Nombre de ${title}..." style="font-weight:600" class="cc-name">
       <select class="cc-state"><option value="">Seleccionar</option><option>CORRECTO</option><option>MEJORABLE</option><option>DEFICIENTE</option><option>NO APLICA</option></select>
       <input placeholder="Observaciones" class="cc-obs">
       <button type="button" class="danger no-print btn-del" onclick="this.closest('.check-item-box').remove()">X</button>
     </div>
-    <div style="margin-top:6px;display:flex;align-items:center;gap:10px;flex-wrap:wrap;">
+    <div style="margin-top:8px;display:flex;align-items:center;gap:10px;flex-wrap:wrap;">
       <input class="no-print" type="file" accept="image/*" multiple style="max-width:260px;padding:4px;font-size:12px;" onchange="addPhotos(this, 'cc_ph_${rnd}')">
-      <span class="small no-print">Adjuntar fotos</span>
+      <span class="small no-print">📷 Adjuntar fotos</span>
     </div>
     <div class="photos" id="cc_ph_${rnd}"></div>
   `;
@@ -197,6 +197,8 @@ function addCustomItem(containerId,title,prefix){
 
 function addAutoMachine(data={}){
   const box=document.getElementById('autoMachinery');
+  const rnd=Math.random().toString(36).substring(2,7);
+  const pId=data.photoBoxId||('am_photos_'+rnd);
   const d=document.createElement('div');
   d.className='card-row auto-m-card';
   d.innerHTML=`
@@ -222,7 +224,11 @@ function addAutoMachine(data={}){
     <div><label>Botiquín</label><select class="am-botiquin"><option value="">Seleccionar</option><option ${data.botiquin==='CORRECTO'?'selected':''}>CORRECTO</option><option ${data.botiquin==='DEFICIENTE'?'selected':''}>DEFICIENTE</option></select></div>
     <div><label>Manual del operador presente</label><select class="am-manual"><option value="">Seleccionar</option><option ${data.manual==='SI'?'selected':''}>SI</option><option ${data.manual==='NO'?'selected':''}>NO</option></select></div>
   </div>
-  <div class="full" style="margin-top:10px;"><label>Fotografías de la máquina</label><input class="no-print" type="file" accept="image/*" multiple onchange="addPhotos(this, 'am_photos_'+Math.random().toString(36).substring(2,7))"><div class="photos" id="${data.photoBoxId||('am_photos_'+Math.random().toString(36).substring(2,7))}"></div></div>
+  <div class="full" style="margin-top:12px;">
+    <label>Fotografías de esta máquina</label>
+    <input class="no-print" type="file" accept="image/*" multiple style="max-width:260px;padding:4px;font-size:12px;" onchange="addPhotos(this, '${pId}')">
+    <div class="photos" id="${pId}"></div>
+  </div>
   <div class="no-print" style="margin-top:10px;text-align:right;"><button type="button" class="danger" onclick="this.closest('.auto-m-card').remove()">Eliminar esta ficha</button></div>
   `;
   box.appendChild(d);
@@ -310,6 +316,7 @@ document.getElementById('gpsLon').addEventListener('input',updateMapLink);
 
 function addAction(data={}){
   const rnd=Math.random().toString(36).substring(2,7);
+  const pId=data.photoBoxId||('act_ph_'+rnd);
   const d=document.createElement('div');
   d.className='item action';
   d.innerHTML=`<div class="grid">
@@ -319,7 +326,11 @@ function addAction(data={}){
     <div><label>Fecha límite</label><input class="a-date" type="date" value="${data.date||''}"></div>
     <div><label>Estado</label><select class="a-state"><option ${data.state==='PENDIENTE'?'selected':''}>PENDIENTE</option><option ${data.state==='EN CURSO'?'selected':''}>EN CURSO</option><option ${data.state==='SUBSANADA'?'selected':''}>SUBSANADA</option></select></div>
     <div class="no-print"><label>&nbsp;</label><button type="button" class="danger" onclick="this.closest('.action').remove()">Eliminar deficiencia</button></div>
-    <div class="full"><label>Fotografías de la deficiencia</label><input class="no-print" type="file" accept="image/*" multiple onchange="addPhotos(this, 'act_ph_${rnd}')"><div class="photos" id="${data.photoBoxId||('act_ph_'+rnd)}"></div></div>
+    <div class="full">
+      <label>Fotografías de la deficiencia</label>
+      <input class="no-print" type="file" accept="image/*" multiple style="max-width:260px;padding:4px;font-size:12px;" onchange="addPhotos(this, '${pId}')">
+      <div class="photos" id="${pId}"></div>
+    </div>
   </div>`;
   document.getElementById('actions').appendChild(d);
   if(data.photos && data.photoBoxId){
@@ -335,10 +346,9 @@ function addAction(data={}){
 
 function getData(){
   const f=document.getElementById('inspection');
-  const data={fields:{},photos:{},actions:[],pdfs:loadedPDFs,autoMachinery:[],customItems:[]};
+  const data={fields:{},photos:{},actions:[],pdfs:loadedPDFs,autoMachinery:[]};
   new FormData(f).forEach((v,k)=>data.fields[k]=v);
 
-  // Recolectar fotos de todos los contenedores de fotos en la página
   document.querySelectorAll('.photos').forEach(box=>{
     if(box.id) data.photos[box.id]=[...box.querySelectorAll('.photo-card img')].map(x=>x.src);
   });
@@ -374,14 +384,11 @@ function setData(data){
   document.getElementById('inspection').reset();
   Object.entries(data.fields||{}).forEach(([k,v])=>{const el=document.querySelector(`[name="${CSS.escape(k)}"]`);if(el)el.value=v});
   
-  // Limpiar todas las fotos actuales
   document.querySelectorAll('.photos').forEach(x=>x.innerHTML='');
 
-  // Restaurar fotos generales por ID
   Object.entries(data.photos||{}).forEach(([id,arr])=>{
     let box=document.getElementById(id);
     if(!box){
-      // Si no existe el contenedor (ej. ítems dinámicos), crearlo dinámicamente si es necesario
       const candidate=document.querySelector(`[onchange*="${id}"]`);
       if(candidate){
         box=document.createElement('div');
