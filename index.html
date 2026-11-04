@@ -156,7 +156,7 @@ function buildChecks(id,items,prefix){
     itemBox.innerHTML=`
       <div class="check-main-row">
         <label>${label}</label>
-        <select name="${prefix}_${i}_estado"><option value="">Seleccionar</option><option>CORRECTO</option><option>MEJORABLE</option><option>DEFICIENTE</option><option>NO APLICA</option></select>
+        <select name="${prefix}_${i}_estado"><option value="">Seleccionar</option><option>SÍ</option><option>NO</option><option>NO APLICA</option></select>
         <input name="${prefix}_${i}_obs" placeholder="Observaciones / detalles">
       </div>
       <div style="margin-top:8px;display:flex;align-items:center;gap:10px;flex-wrap:wrap;">
@@ -182,7 +182,7 @@ function addCustomItem(containerId,title){
   itemBox.innerHTML=`
     <div style="display:grid;grid-template-columns:1fr 150px 1.8fr auto;gap:10px;align-items:center;">
       <input placeholder="Nombre de ${title}..." style="font-weight:600" class="cc-name">
-      <select class="cc-state"><option value="">Seleccionar</option><option>CORRECTO</option><option>MEJORABLE</option><option>DEFICIENTE</option><option>NO APLICA</option></select>
+      <select class="cc-state"><option value="">Seleccionar</option><option>SÍ</option><option>NO</option><option>NO APLICA</option></select>
       <input placeholder="Observaciones" class="cc-obs">
       <button type="button" class="danger no-print btn-del" onclick="this.closest('.check-item-box').remove()">X</button>
     </div>
@@ -207,22 +207,22 @@ function addAutoMachine(data={}){
     <div><label>Tipo de máquina</label><input class="am-type" placeholder="Ej. Retropala, Tractor, Dumper" value="${data.type||''}"></div>
     <div><label>Marca / Modelo</label><input class="am-model" value="${data.model||''}"></div>
     <div><label>Matrícula / Nº Identificación</label><input class="am-id" value="${data.id||''}"></div>
-    <div><label>Estado general</label><select class="am-status"><option value="">Seleccionar</option><option ${data.status==='CORRECTO'?'selected':''}>CORRECTO</option><option ${data.status==='DEFICIENTE'?'selected':''}>DEFICIENTE</option><option ${data.status==='FUERA DE SERVICIO'?'selected':''}>FUERA DE SERVICIO</option></select></div>
+    <div><label>Estado general</label><select class="am-status"><option value="">Seleccionar</option><option ${data.status==='SÍ'?'selected':''}>SÍ</option><option ${data.status==='NO'?'selected':''}>NO</option><option ${data.status==='NO APLICA'?'selected':''}>NO APLICA</option></select></div>
   </div>
   <h3>Ficha de inspección de seguridad</h3>
   <div class="grid">
-    <div><label>Cabina de seguridad (ROPS/FOPS)</label><select class="am-cabina"><option value="">Seleccionar</option><option ${data.cabina==='CORRECTO'?'selected':''}>CORRECTO</option><option ${data.cabina==='DEFICIENTE'?'selected':''}>DEFICIENTE</option><option ${data.cabina==='NO APLICA'?'selected':''}>NO APLICA</option></select></div>
-    <div><label>Estado de la cabina / cristales</label><select class="am-est-cabina"><option value="">Seleccionar</option><option ${data.estCabina==='CORRECTO'?'selected':''}>CORRECTO</option><option ${data.estCabina==='DEFICIENTE'?'selected':''}>DEFICIENTE</option></select></div>
-    <div><label>Instrumentos de control / cuadro</label><select class="am-cuadro"><option value="">Seleccionar</option><option ${data.cuadro==='CORRECTO'?'selected':''}>CORRECTO</option><option ${data.cuadro==='DEFICIENTE'?'selected':''}>DEFICIENTE</option></select></div>
-    <div><label>Bocina</label><select class="am-bocina"><option value="">Seleccionar</option><option ${data.bocina==='CORRECTO'?'selected':''}>CORRECTO</option><option ${data.bocina==='DEFICIENTE'?'selected':''}>DEFICIENTE</option></select></div>
-    <div><label>Estado de cubiertas / cadenas</label><select class="am-ruedas"><option value="">Seleccionar</option><option ${data.ruedas==='CORRECTO'?'selected':''}>CORRECTO</option><option ${data.ruedas==='DEFICIENTE'?'selected':''}>DEFICIENTE</option></select></div>
-    <div><label>Nivel de ruido / insonorización</label><select class="am-ruido"><option value="">Seleccionar</option><option ${data.ruido==='CORRECTO'?'selected':''}>CORRECTO</option><option ${data.ruido==='MEJORABLE'?'selected':''}>MEJORABLE</option></select></div>
-    <div><label>Cinturón de seguridad</label><select class="am-cinturon"><option value="">Seleccionar</option><option ${data.cinturon==='CORRECTO'?'selected':''}>CORRECTO</option><option ${data.cinturon==='DEFICIENTE'?'selected':''}>DEFICIENTE</option></select></div>
-    <div><label>Señal acústica de marcha atrás</label><select class="am-acustica"><option value="">Seleccionar</option><option ${data.acustica==='CORRECTO'?'selected':''}>CORRECTO</option><option ${data.acustica==='DEFICIENTE'?'selected':''}>DEFICIENTE</option></select></div>
-    <div><label>Iluminación / Faros</label><select class="am-luces"><option value="">Seleccionar</option><option ${data.luces==='CORRECTO'?'selected':''}>CORRECTO</option><option ${data.luces==='DEFICIENTE'?'selected':''}>DEFICIENTE</option></select></div>
-    <div><label>Extintor portátil</label><select class="am-extintor"><option value="">Seleccionar</option><option ${data.extintor==='CORRECTO'?'selected':''}>CORRECTO</option><option ${data.extintor==='DEFICIENTE'?'selected':''}>DEFICIENTE</option></select></div>
-    <div><label>Botiquín</label><select class="am-botiquin"><option value="">Seleccionar</option><option ${data.botiquin==='CORRECTO'?'selected':''}>CORRECTO</option><option ${data.botiquin==='DEFICIENTE'?'selected':''}>DEFICIENTE</option></select></div>
-    <div><label>Manual del operador presente</label><select class="am-manual"><option value="">Seleccionar</option><option ${data.manual==='SI'?'selected':''}>SI</option><option ${data.manual==='NO'?'selected':''}>NO</option></select></div>
+    <div><label>Cabina de seguridad (ROPS/FOPS)</label><select class="am-cabina"><option value="">Seleccionar</option><option ${data.cabina==='SÍ'?'selected':''}>SÍ</option><option ${data.cabina==='NO'?'selected':''}>NO</option><option ${data.cabina==='NO APLICA'?'selected':''}>NO APLICA</option></select></div>
+    <div><label>Estado de la cabina / cristales</label><select class="am-est-cabina"><option value="">Seleccionar</option><option ${data.estCabina==='SÍ'?'selected':''}>SÍ</option><option ${data.estCabina==='NO'?'selected':''}>NO</option><option ${data.estCabina==='NO APLICA'?'selected':''}>NO APLICA</option></select></div>
+    <div><label>Instrumentos de control / cuadro</label><select class="am-cuadro"><option value="">Seleccionar</option><option ${data.cuadro==='SÍ'?'selected':''}>SÍ</option><option ${data.cuadro==='NO'?'selected':''}>NO</option><option ${data.cuadro==='NO APLICA'?'selected':''}>NO APLICA</option></select></div>
+    <div><label>Bocina</label><select class="am-bocina"><option value="">Seleccionar</option><option ${data.bocina==='SÍ'?'selected':''}>SÍ</option><option ${data.bocina==='NO'?'selected':''}>NO</option><option ${data.bocina==='NO APLICA'?'selected':''}>NO APLICA</option></select></div>
+    <div><label>Estado de cubiertas / cadenas</label><select class="am-ruedas"><option value="">Seleccionar</option><option ${data.ruedas==='SÍ'?'selected':''}>SÍ</option><option ${data.ruedas==='NO'?'selected':''}>NO</option><option ${data.ruedas==='NO APLICA'?'selected':''}>NO APLICA</option></select></div>
+    <div><label>Nivel de ruido / insonorización</label><select class="am-ruido"><option value="">Seleccionar</option><option ${data.ruido==='SÍ'?'selected':''}>SÍ</option><option ${data.ruido==='NO'?'selected':''}>NO</option><option ${data.ruido==='NO APLICA'?'selected':''}>NO APLICA</option></select></div>
+    <div><label>Cinturón de seguridad</label><select class="am-cinturon"><option value="">Seleccionar</option><option ${data.cinturon==='SÍ'?'selected':''}>SÍ</option><option ${data.cinturon==='NO'?'selected':''}>NO</option><option ${data.cinturon==='NO APLICA'?'selected':''}>NO APLICA</option></select></div>
+    <div><label>Señal acústica de marcha atrás</label><select class="am-acustica"><option value="">Seleccionar</option><option ${data.acustica==='SÍ'?'selected':''}>SÍ</option><option ${data.acustica==='NO'?'selected':''}>NO</option><option ${data.acustica==='NO APLICA'?'selected':''}>NO APLICA</option></select></div>
+    <div><label>Iluminación / Faros</label><select class="am-luces"><option value="">Seleccionar</option><option ${data.luces==='SÍ'?'selected':''}>SÍ</option><option ${data.luces==='NO'?'selected':''}>NO</option><option ${data.luces==='NO APLICA'?'selected':''}>NO APLICA</option></select></div>
+    <div><label>Extintor portátil</label><select class="am-extintor"><option value="">Seleccionar</option><option ${data.extintor==='SÍ'?'selected':''}>SÍ</option><option ${data.extintor==='NO'?'selected':''}>NO</option><option ${data.extintor==='NO APLICA'?'selected':''}>NO APLICA</option></select></div>
+    <div><label>Botiquín</label><select class="am-botiquin"><option value="">Seleccionar</option><option ${data.botiquin==='SÍ'?'selected':''}>SÍ</option><option ${data.botiquin==='NO'?'selected':''}>NO</option><option ${data.botiquin==='NO APLICA'?'selected':''}>NO APLICA</option></select></div>
+    <div><label>Manual del operador presente</label><select class="am-manual"><option value="">Seleccionar</option><option ${data.manual==='SÍ'?'selected':''}>SÍ</option><option ${data.manual==='NO'?'selected':''}>NO</option><option ${data.manual==='NO APLICA'?'selected':''}>NO APLICA</option></select></div>
   </div>
   <div class="full" style="margin-top:12px;">
     <label>Fotografías de esta máquina</label>
