@@ -20,7 +20,10 @@ textarea{min-height:75px;resize:vertical}label{display:block;font-weight:600;fon
 .grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}.full{grid-column:1/-1}
 h2{font-size:19px;margin:0 0 12px;color:var(--navy)}h3{font-size:16px;color:var(--navy);margin:14px 0 6px;border-bottom:1px dashed var(--line);padding-bottom:4px}
 .item{border-top:1px solid var(--line);padding:12px 0}.item:first-of-type{border-top:0}
-.photos{display:flex;gap:10px;flex-wrap:wrap;margin-top:10px}.photos img{width:160px;height:120px;object-fit:cover;border-radius:6px;border:1px solid var(--line)}
+.photos{display:flex;gap:10px;flex-wrap:wrap;margin-top:10px}
+.photo-card{position:relative;width:160px;height:120px;border:1px solid var(--line);border-radius:6px;overflow:hidden;background:#000}
+.photos img{width:100%;height:100%;object-fit:cover}
+.photo-card button{position:absolute;top:4px;right:4px;background:rgba(167,53,53,0.85);color:white;border:0;border-radius:4px;padding:2px 6px;font-size:11px;cursor:pointer}
 .doc-list{margin-top:8px;font-size:13px}.doc-item{display:flex;align-items:center;gap:8px;padding:6px;background:#f8fafc;border:1px solid var(--line);border-radius:6px;margin-bottom:4px}
 .small{font-size:12px;color:var(--muted)}.hidden{display:none!important}
 #savedList button{margin:4px}.status{font-size:12px;color:var(--green);font-weight:bold}
@@ -35,7 +38,8 @@ a{color:var(--blue)}
  body{background:white;font-size:11px}header{padding:12px;color:#000;background:white;border-bottom:2px solid #15324b}header p{color:#333}
  main{max-width:none;margin:0;padding:0}.toolbar,.no-print,.removePhoto,.btn-del{display:none!important}
  .panel{border:0;padding:6px;margin:0;break-inside:auto}.item,.card-row,.check-row{break-inside:avoid}
- .photos img{width:220px;height:165px}input,select,textarea{border:0;padding:2px 0;appearance:none;font-size:11px}
+ .photo-card{width:200px;height:150px;border:1px solid #ccc;break-inside:avoid}
+ input,select,textarea{border:0;padding:2px 0;appearance:none;font-size:11px}
  textarea{min-height:25px}h2,h3{break-after:avoid}a{color:#000;text-decoration:none}
 }
 </style>
@@ -173,25 +177,25 @@ function addAutoMachine(data={}){
   d.innerHTML=`
   <h3>Ficha de Maquinaria Autopropulsada</h3>
   <div class="grid">
-    <div><label>Tipo de máquina</label><input class="am-type" placeholder="Ej. Retropala, Tractor, Dumper"></div>
-    <div><label>Marca / Modelo</label><input class="am-model"></div>
-    <div><label>Matrícula / Nº Identificación</label><input class="am-id"></div>
-    <div><label>Estado general</label><select class="am-status"><option value="">Seleccionar</option><option>CORRECTO</option><option>DEFICIENTE</option><option>FUERA DE SERVICIO</option></select></div>
+    <div><label>Tipo de máquina</label><input class="am-type" placeholder="Ej. Retropala, Tractor, Dumper" value="${data.type||''}"></div>
+    <div><label>Marca / Modelo</label><input class="am-model" value="${data.model||''}"></div>
+    <div><label>Matrícula / Nº Identificación</label><input class="am-id" value="${data.id||''}"></div>
+    <div><label>Estado general</label><select class="am-status"><option value="">Seleccionar</option><option ${data.status==='CORRECTO'?'selected':''}>CORRECTO</option><option ${data.status==='DEFICIENTE'?'selected':''}>DEFICIENTE</option><option ${data.status==='FUERA DE SERVICIO'?'selected':''}>FUERA DE SERVICIO</option></select></div>
   </div>
   <h3>Ficha de inspección de seguridad</h3>
   <div class="grid">
-    <div><label>Cabina de seguridad (ROPS/FOPS)</label><select class="am-cabina"><option value="">Seleccionar</option><option>CORRECTO</option><option>DEFICIENTE</option><option>NO APLICA</option></select></div>
-    <div><label>Estado de la cabina / cristales</label><select class="am-est-cabina"><option value="">Seleccionar</option><option>CORRECTO</option><option>DEFICIENTE</option></select></div>
-    <div><label>Instrumentos de control / cuadro</label><select class="am-cuadro"><option value="">Seleccionar</option><option>CORRECTO</option><option>DEFICIENTE</option></select></div>
-    <div><label>Bocina</label><select class="am-bocina"><option value="">Seleccionar</option><option>CORRECTO</option><option>DEFICIENTE</option></select></div>
-    <div><label>Estado de cubiertas / cadenas</label><select class="am-ruedas"><option value="">Seleccionar</option><option>CORRECTO</option><option>DEFICIENTE</option></select></div>
-    <div><label>Nivel de ruido / insonorización</label><select class="am-ruido"><option value="">Seleccionar</option><option>CORRECTO</option><option>MEJORABLE</option></select></div>
-    <div><label>Cinturón de seguridad</label><select class="am-cinturon"><option value="">Seleccionar</option><option>CORRECTO</option><option>DEFICIENTE</option></select></div>
-    <div><label>Señal acústica de marcha atrás</label><select class="am-acustica"><option value="">Seleccionar</option><option>CORRECTO</option><option>DEFICIENTE</option></select></div>
-    <div><label>Iluminación / Faros</label><select class="am-luces"><option value="">Seleccionar</option><option>CORRECTO</option><option>DEFICIENTE</option></select></div>
-    <div><label>Extintor portátil</label><select class="am-extintor"><option value="">Seleccionar</option><option>CORRECTO</option><option>DEFICIENTE</option></select></div>
-    <div><label>Botiquín</label><select class="am-botiquin"><option value="">Seleccionar</option><option>CORRECTO</option><option>DEFICIENTE</option></select></div>
-    <div><label>Manual del operador presente</label><select class="am-manual"><option value="">Seleccionar</option><option>SI</option><option>NO</option></select></div>
+    <div><label>Cabina de seguridad (ROPS/FOPS)</label><select class="am-cabina"><option value="">Seleccionar</option><option ${data.cabina==='CORRECTO'?'selected':''}>CORRECTO</option><option ${data.cabina==='DEFICIENTE'?'selected':''}>DEFICIENTE</option><option ${data.cabina==='NO APLICA'?'selected':''}>NO APLICA</option></select></div>
+    <div><label>Estado de la cabina / cristales</label><select class="am-est-cabina"><option value="">Seleccionar</option><option ${data.estCabina==='CORRECTO'?'selected':''}>CORRECTO</option><option ${data.estCabina==='DEFICIENTE'?'selected':''}>DEFICIENTE</option></select></div>
+    <div><label>Instrumentos de control / cuadro</label><select class="am-cuadro"><option value="">Seleccionar</option><option ${data.cuadro==='CORRECTO'?'selected':''}>CORRECTO</option><option ${data.cuadro==='DEFICIENTE'?'selected':''}>DEFICIENTE</option></select></div>
+    <div><label>Bocina</label><select class="am-bocina"><option value="">Seleccionar</option><option ${data.bocina==='CORRECTO'?'selected':''}>CORRECTO</option><option ${data.bocina==='DEFICIENTE'?'selected':''}>DEFICIENTE</option></select></div>
+    <div><label>Estado de cubiertas / cadenas</label><select class="am-ruedas"><option value="">Seleccionar</option><option ${data.ruedas==='CORRECTO'?'selected':''}>CORRECTO</option><option ${data.ruedas==='DEFICIENTE'?'selected':''}>DEFICIENTE</option></select></div>
+    <div><label>Nivel de ruido / insonorización</label><select class="am-ruido"><option value="">Seleccionar</option><option ${data.ruido==='CORRECTO'?'selected':''}>CORRECTO</option><option ${data.ruido==='MEJORABLE'?'selected':''}>MEJORABLE</option></select></div>
+    <div><label>Cinturón de seguridad</label><select class="am-cinturon"><option value="">Seleccionar</option><option ${data.cinturon==='CORRECTO'?'selected':''}>CORRECTO</option><option ${data.cinturon==='DEFICIENTE'?'selected':''}>DEFICIENTE</option></select></div>
+    <div><label>Señal acústica de marcha atrás</label><select class="am-acustica"><option value="">Seleccionar</option><option ${data.acustica==='CORRECTO'?'selected':''}>CORRECTO</option><option ${data.acustica==='DEFICIENTE'?'selected':''}>DEFICIENTE</option></select></div>
+    <div><label>Iluminación / Faros</label><select class="am-luces"><option value="">Seleccionar</option><option ${data.luces==='CORRECTO'?'selected':''}>CORRECTO</option><option ${data.luces==='DEFICIENTE'?'selected':''}>DEFICIENTE</option></select></div>
+    <div><label>Extintor portátil</label><select class="am-extintor"><option value="">Seleccionar</option><option ${data.extintor==='CORRECTO'?'selected':''}>CORRECTO</option><option ${data.extintor==='DEFICIENTE'?'selected':''}>DEFICIENTE</option></select></div>
+    <div><label>Botiquín</label><select class="am-botiquin"><option value="">Seleccionar</option><option ${data.botiquin==='CORRECTO'?'selected':''}>CORRECTO</option><option ${data.botiquin==='DEFICIENTE'?'selected':''}>DEFICIENTE</option></select></div>
+    <div><label>Manual del operador presente</label><select class="am-manual"><option value="">Seleccionar</option><option ${data.manual==='SI'?'selected':''}>SI</option><option ${data.manual==='NO'?'selected':''}>NO</option></select></div>
   </div>
   <div class="no-print" style="margin-top:10px;text-align:right;"><button type="button" class="danger" onclick="this.closest('.auto-m-card').remove()">Eliminar esta ficha</button></div>
   `;
@@ -203,9 +207,10 @@ function addPhotos(inp,id){
   [...inp.files].forEach(f=>{
     const r=new FileReader();
     r.onload=()=>{
-      const img=document.createElement('img');
-      img.src=r.result;
-      box.appendChild(img);
+      const card=document.createElement('div');
+      card.className='photo-card';
+      card.innerHTML=`<img src="${r.result}"><button type="button" class="no-print" onclick="this.closest('.photo-card').remove()">X</button>`;
+      box.appendChild(card);
     };
     r.readAsDataURL(f);
   });
@@ -265,7 +270,7 @@ document.getElementById('gpsLon').addEventListener('input',updateMapLink);
 function addAction(data={}){
   const d=document.createElement('div');
   d.className='item action';
-  d.innerHTML=`<div class="grid"><div><label>Deficiencia detectada</label><textarea class="a-def"></textarea></div><div><label>Medida correctora</label><textarea class="a-med"></textarea></div><div><label>Responsable</label><input class="a-res"></div><div><label>Fecha límite</label><input class="a-date" type="date"></div><div><label>Estado</label><select class="a-state"><option>PENDIENTE</option><option>EN CURSO</option><option>SUBSANADA</option></select></div><div class="no-print"><label>&nbsp;</label><button type="button" class="danger" onclick="this.closest('.action').remove()">Eliminar deficiencia</button></div></div>`;
+  d.innerHTML=`<div class="grid"><div><label>Deficiencia detectada</label><textarea class="a-def">${data.def||''}</textarea></div><div><label>Medida correctora</label><textarea class="a-med">${data.med||''}</textarea></div><div><label>Responsable</label><input class="a-res" value="${data.res||''}"></div><div><label>Fecha límite</label><input class="a-date" type="date" value="${data.date||''}"></div><div><label>Estado</label><select class="a-state"><option ${data.state==='PENDIENTE'?'selected':''}>PENDIENTE</option><option ${data.state==='EN CURSO'?'selected':''}>EN CURSO</option><option ${data.state==='SUBSANADA'?'selected':''}>SUBSANADA</option></select></div><div class="no-print"><label>&nbsp;</label><button type="button" class="danger" onclick="this.closest('.action').remove()">Eliminar deficiencia</button></div></div>`;
   document.getElementById('actions').appendChild(d);
 }
 
@@ -273,7 +278,7 @@ function getData(){
   const f=document.getElementById('inspection');
   const data={fields:{},photos:{},actions:[],pdfs:loadedPDFs,autoMachinery:[]};
   new FormData(f).forEach((v,k)=>data.fields[k]=v);
-  document.querySelectorAll('.photos').forEach(box=>data.photos[box.id]=[...box.querySelectorAll('img')].map(x=>x.src));
+  document.querySelectorAll('.photos').forEach(box=>data.photos[box.id]=[...box.querySelectorAll('.photo-card img')].map(x=>x.src));
   document.querySelectorAll('.action').forEach(d=>data.actions.push({def:d.querySelector('.a-def').value,med:d.querySelector('.a-med').value,res:d.querySelector('.a-res').value,date:d.querySelector('.a-date').value,state:d.querySelector('.a-state').value}));
   document.querySelectorAll('.auto-m-card').forEach(d=>data.autoMachinery.push({
     type:d.querySelector('.am-type').value,model:d.querySelector('.am-model').value,id:d.querySelector('.am-id').value,status:d.querySelector('.am-status').value,
@@ -288,7 +293,12 @@ function setData(data){
   document.getElementById('inspection').reset();
   Object.entries(data.fields||{}).forEach(([k,v])=>{const el=document.querySelector(`[name="${CSS.escape(k)}"]`);if(el)el.value=v});
   document.querySelectorAll('.photos').forEach(x=>x.innerHTML='');
-  Object.entries(data.photos||{}).forEach(([id,arr])=>{const box=document.getElementById(id);if(box)arr.forEach(src=>{const im=document.createElement('img');im.src=src;box.appendChild(im)})});
+  Object.entries(data.photos||{}).forEach(([id,arr])=>{const box=document.getElementById(id);if(box)arr.forEach(src=>{
+    const card=document.createElement('div');
+    card.className='photo-card';
+    card.innerHTML=`<img src="${src}"><button type="button" class="no-print" onclick="this.closest('.photo-card').remove()">X</button>`;
+    box.appendChild(card);
+  })});
   loadedPDFs=data.pdfs||[];renderPDFList();
   document.getElementById('actions').innerHTML='';(data.actions||[]).forEach(addAction);
   document.getElementById('autoMachinery').innerHTML='';(data.autoMachinery||[]).forEach(addAutoMachine);
@@ -327,7 +337,7 @@ function showSaved(){
 function newInspection(){
   if(confirm('¿Deseas iniciar una nueva inspección en blanco?')){
     document.getElementById('inspection').reset();
-    document.querySelectorAll('.photos').forEach(x=>x.innerHTML='');
+    document.querySelectorAll('.photos').forEach(x=>x.html='';x.innerHTML='');
     document.getElementById('actions').innerHTML='';
     document.getElementById('autoMachinery').innerHTML='';
     loadedPDFs=[];renderPDFList();
