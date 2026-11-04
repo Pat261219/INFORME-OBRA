@@ -7,10 +7,9 @@
 <style>
 :root{--navy:#15324b;--blue:#245b82;--bg:#f2f5f8;--line:#d9e1e8;--muted:#637487;--red:#a73535;--green:#23633b}
 *{box-sizing:border-box}body{margin:0;background:var(--bg);font:15px Arial,sans-serif;color:#1d2a36}
-header{background:var(--navy);color:white;padding:20px max(18px,calc((100% - 1100px)/2));display:flex;align-items:center;justify-content:space-between;gap:15px;flex-wrap:wrap}
-.header-titles h1{margin:0;font-size:23px;letter-spacing:.4px;color:white}
-.header-titles p{margin:6px 0 0;color:#d7e4ee}
-.header-logo img{height:48px;width:auto;background:white;padding:4px 8px;border-radius:6px}
+header{background:var(--navy);color:white;padding:20px max(18px,calc((100% - 1100px)/2))}
+header h1{margin:0;font-size:23px;letter-spacing:.4px;color:white}
+header p{margin:6px 0 0;color:#d7e4ee}
 main{max-width:1100px;margin:22px auto;padding:0 14px}
 .toolbar,.panel{background:white;border:1px solid var(--line);border-radius:12px;padding:17px;margin-bottom:16px}
 .toolbar{display:flex;gap:10px;flex-wrap:wrap;align-items:center}
@@ -33,8 +32,7 @@ a{color:var(--blue)}
 @media(max-width:760px){.check-row{grid-template-columns:1fr}.check-row label{margin-bottom:0}}
 @media(max-width:650px){.grid{grid-template-columns:1fr}.full{grid-column:auto}.toolbar{align-items:stretch}.toolbar button{flex:1}.gps-line button{width:100%}}
 @media print{
- body{background:white;font-size:11px}header{padding:10px;color:#000;background:white;border-bottom:2px solid #15324b}header p{color:#333}
- .header-logo img{height:38px;border:0;padding:0}
+ body{background:white;font-size:11px}header{padding:12px;color:#000;background:white;border-bottom:2px solid #15324b}header p{color:#333}
  main{max-width:none;margin:0;padding:0}.toolbar,.no-print,.removePhoto,.btn-del{display:none!important}
  .panel{border:0;padding:6px;margin:0;break-inside:auto}.item,.card-row,.check-row{break-inside:avoid}
  .photos img{width:220px;height:165px}input,select,textarea{border:0;padding:2px 0;appearance:none;font-size:11px}
@@ -44,13 +42,8 @@ a{color:var(--blue)}
 </head>
 <body>
 <header>
-<div class="header-titles">
 <h1>OBRAREPORT</h1>
 <p>Seguridad en Obra · Grupo TRAGSA</p>
-</div>
-<div class="header-logo">
-<img src="https://pat261219.github.io/INFORME-OBRA/logo.png" alt="Grupo TRAGSA" onerror="this.src='https://raw.githubusercontent.com/Pat261219/INFORME-OBRA/main/logo.png'">
-</div>
 </header>
 <main>
 <div class="toolbar no-print">
