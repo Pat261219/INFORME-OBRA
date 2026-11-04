@@ -3,12 +3,14 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<title>ObraReport | Seguridad en Obra</title>
+<title>ObraReport | Seguridad en Obra - Grupo TRAGSA</title>
 <style>
-:root{--navy:#15324b;--blue:#245b82;--bg:#f2f5f8;--line:#d9e1e8;--muted:#637487;--red:#a73535}
+:root{--navy:#15324b;--blue:#245b82;--bg:#f2f5f8;--line:#d9e1e8;--muted:#637487;--red:#a73535;--green:#23633b}
 *{box-sizing:border-box}body{margin:0;background:var(--bg);font:15px Arial,sans-serif;color:#1d2a36}
-header{background:var(--navy);color:white;padding:20px max(18px,calc((100% - 1100px)/2))}
-header h1{margin:0;font-size:23px;letter-spacing:.4px}header p{margin:6px 0 0;color:#d7e4ee}
+header{background:var(--navy);color:white;padding:20px max(18px,calc((100% - 1100px)/2));display:flex;align-items:center;justify-content:space-between;gap:15px;flex-wrap:wrap}
+.header-titles h1{margin:0;font-size:23px;letter-spacing:.4px;color:white}
+.header-titles p{margin:6px 0 0;color:#d7e4ee}
+.header-logo img{height:48px;width:auto;background:white;padding:4px 8px;border-radius:6px}
 main{max-width:1100px;margin:22px auto;padding:0 14px}
 .toolbar,.panel{background:white;border:1px solid var(--line);border-radius:12px;padding:17px;margin-bottom:16px}
 .toolbar{display:flex;gap:10px;flex-wrap:wrap;align-items:center}
@@ -17,31 +19,39 @@ button.secondary{background:#e8eef3;color:var(--navy)}button.danger{background:v
 input,select,textarea{width:100%;padding:10px;border:1px solid #cbd5df;border-radius:7px;font:inherit;background:#fff}
 textarea{min-height:75px;resize:vertical}label{display:block;font-weight:600;font-size:13px;color:#405366;margin:10px 0 5px}
 .grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}.full{grid-column:1/-1}
-h2{font-size:19px;margin:0 0 12px;color:var(--navy)}h3{font-size:16px;color:var(--navy);margin:18px 0 8px}
+h2{font-size:19px;margin:0 0 12px;color:var(--navy)}h3{font-size:16px;color:var(--navy);margin:14px 0 6px;border-bottom:1px dashed var(--line);padding-bottom:4px}
 .item{border-top:1px solid var(--line);padding:12px 0}.item:first-of-type{border-top:0}
-.itemhead{display:flex;gap:10px;align-items:center}.itemhead strong{flex:1}
-.photos{display:flex;gap:8px;flex-wrap:wrap;margin-top:8px}.photos img{width:105px;height:85px;object-fit:cover;border-radius:6px;border:1px solid var(--line)}
+.photos{display:flex;gap:10px;flex-wrap:wrap;margin-top:10px}.photos img{width:160px;height:120px;object-fit:cover;border-radius:6px;border:1px solid var(--line)}
+.doc-list{margin-top:8px;font-size:13px}.doc-item{display:flex;align-items:center;gap:8px;padding:6px;background:#f8fafc;border:1px solid var(--line);border-radius:6px;margin-bottom:4px}
 .small{font-size:12px;color:var(--muted)}.hidden{display:none!important}
-#savedList button{margin:4px}.status{font-size:12px;color:#23633b}
-.machine-row{display:grid;grid-template-columns:1.1fr 1fr 1fr 1fr auto;gap:8px;align-items:end;padding:10px 0;border-top:1px solid var(--line)}
-.machine-row label{margin-top:0}.gps-line{display:flex;gap:8px;align-items:end;flex-wrap:wrap}.gps-line>div{flex:1;min-width:140px}.gps-line button{white-space:nowrap}
-.check-row{display:grid;grid-template-columns:1fr 170px 1.5fr;gap:10px;align-items:center;padding:9px 0;border-top:1px solid var(--line)}
+#savedList button{margin:4px}.status{font-size:12px;color:var(--green);font-weight:bold}
+.card-row{background:#fafbfc;border:1px solid var(--line);border-radius:8px;padding:12px;margin-bottom:12px}
+.gps-line{display:flex;gap:8px;align-items:end;flex-wrap:wrap}.gps-line>div{flex:1;min-width:140px}.gps-line button{white-space:nowrap}
+.check-row{display:grid;grid-template-columns:1.2fr 160px 1.5fr;gap:10px;align-items:center;padding:8px 0;border-top:1px solid var(--line)}
 .check-row label{margin:0}.check-row input{min-width:0}
 a{color:var(--blue)}
-@media(max-width:760px){.machine-row{grid-template-columns:1fr 1fr}.machine-row .machine-delete{grid-column:1/-1}.check-row{grid-template-columns:1fr}.check-row label{margin-bottom:0}}
+@media(max-width:760px){.check-row{grid-template-columns:1fr}.check-row label{margin-bottom:0}}
 @media(max-width:650px){.grid{grid-template-columns:1fr}.full{grid-column:auto}.toolbar{align-items:stretch}.toolbar button{flex:1}.gps-line button{width:100%}}
 @media print{
- body{background:white;font-size:11px}header{padding:12px;color:#000;background:white;border-bottom:2px solid #15324b}header p{color:#333}
- main{max-width:none;margin:0;padding:0}.toolbar,.no-print,.removePhoto,.machine-delete{display:none!important}
- .panel{border:0;padding:8px;margin:0;break-inside:auto}.item,.machine-row,.check-row{break-inside:avoid}
- .photos img{width:115px;height:85px}input,select,textarea{border:0;padding:2px 0;appearance:none;font-size:11px}
- textarea{min-height:25px}h2,h3{break-after:avoid}.machine-row{grid-template-columns:1.1fr 1fr 1fr 1fr auto}
- a{color:#000;text-decoration:none}
+ body{background:white;font-size:11px}header{padding:10px;color:#000;background:white;border-bottom:2px solid #15324b}header p{color:#333}
+ .header-logo img{height:38px;border:0;padding:0}
+ main{max-width:none;margin:0;padding:0}.toolbar,.no-print,.removePhoto,.btn-del{display:none!important}
+ .panel{border:0;padding:6px;margin:0;break-inside:auto}.item,.card-row,.check-row{break-inside:avoid}
+ .photos img{width:220px;height:165px}input,select,textarea{border:0;padding:2px 0;appearance:none;font-size:11px}
+ textarea{min-height:25px}h2,h3{break-after:avoid}a{color:#000;text-decoration:none}
 }
 </style>
 </head>
 <body>
-<header><h1>OBRAREPORT</h1><p>Seguridad en Obra · Grupo TRAGSA</p></header>
+<header>
+<div class="header-titles">
+<h1>OBRAREPORT</h1>
+<p>Seguridad en Obra · Grupo TRAGSA</p>
+</div>
+<div class="header-logo">
+<img src="https://pat261219.github.io/INFORME-OBRA/logo.png" alt="Grupo TRAGSA" onerror="this.src='https://raw.githubusercontent.com/Pat261219/INFORME-OBRA/main/logo.png'">
+</div>
+</header>
 <main>
 <div class="toolbar no-print">
 <button type="button" onclick="newInspection()">Nueva inspección</button>
@@ -50,73 +60,290 @@ a{color:var(--blue)}
 <button type="button" class="secondary" onclick="showSaved()">Inspecciones guardadas</button>
 <span id="msg" class="status"></span>
 </div>
-<section class="panel" id="savedPanel" hidden><h2>Inspecciones guardadas en este dispositivo</h2><div id="savedList"></div><p class="small">Los datos se guardan en este navegador. Exporta el PDF y conserva una copia de seguridad; no se sincronizan automáticamente entre dispositivos.</p></section>
+<section class="panel" id="savedPanel" hidden><h2>Inspecciones guardadas en este dispositivo</h2><div id="savedList"></div><p class="small">Los datos se guardan en el navegador local. Exporta a PDF para copias definitivas.</p></section>
 <form id="inspection">
+
+<!-- 1. DATOS IDENTIFICATIVOS -->
 <section class="panel"><h2>1. Datos identificativos</h2><div class="grid">
-<div><label>Tipo de informe</label><select name="tipoInforme"><option>Inspección general de obra</option><option>Visita de prevención – trabajos forestales</option></select></div>
-<div><label>Código de obra</label><input name="codigo"></div><div><label>Nombre de la obra / actuación</label><input name="obra"></div>
-<div><label>Fecha de inspección</label><input name="fecha" type="date"></div><div><label>Técnico de PRL</label><input name="tecnico"></div>
-<div><label>Jefe de obra / responsable</label><input name="jefe"></div><div><label>Número de trabajadores</label><input name="trabajadores" type="number" min="0"></div>
-<div class="full"><label>Ubicación / descripción del lugar</label><input name="ubicacion" placeholder="Monte, paraje, pista, tramo, término municipal..."></div>
-<div class="full"><label>Localización GPS</label><div class="gps-line">
+<div><label>Código de obra</label><input name="codigo" placeholder="Ej. 86661"></div>
+<div><label>Nombre de la obra / actuación</label><input name="obra" placeholder="Nombre completo de la actuación"></div>
+<div><label>Tipo de visita</label><select name="tipoVisita"><option value="">Seleccionar tipo</option><option>Visita de seguridad (Gerente)</option><option>IPS (Jefe de obra / asimilados)</option><option>V_TPRL (Visita Técnico PRL)</option></select></div>
+<div><label>Técnico de PRL</label><input name="tecnico"></div>
+<div><label>Jefe de obra / Responsable</label><input name="jefe"></div>
+<div class="full"><label>Objeto de la visita</label><textarea name="objetoVisita" placeholder="Verificación del procedimiento PRL.01, estado de instalaciones, etc."></textarea></div>
+<div class="full"><label>Asistentes a la visita</label><textarea name="asistentes" placeholder="Nombre y cargo de las personas presentes"></textarea></div>
+<div class="full"><label>Lugar de la visita (Municipio, Paraje, Monte)</label><input name="ubicacion" placeholder="Instalaciones provisionales, PK, monte..."></div>
+<div class="full"><label>Ubicación GPS</label><div class="gps-line">
 <div><label>Latitud</label><input name="gpsLat" id="gpsLat" placeholder="Ej. 42.5987"></div>
 <div><label>Longitud</label><input name="gpsLon" id="gpsLon" placeholder="-5.5671"></div>
 <button type="button" class="no-print" onclick="getGPS()">Obtener ubicación GPS</button>
-</div><p class="small" id="gpsStatus">Pulsa el botón para capturar la posición del dispositivo. El navegador puede pedir permiso de ubicación.</p><p id="mapLink" class="small"></p></div>
+</div><p class="small" id="gpsStatus">Pulsa para capturar la posición actual del dispositivo.</p><p id="mapLink" class="small"></p></div>
 </div></section>
-<div id="sections"></div>
-<section class="panel"><h2>22. Inventario de maquinaria y vehículos</h2>
-<p class="small">Añade todos los equipos presentes en la actuación. Puedes incorporar o eliminar filas según las necesidades de cada visita.</p>
-<div id="machinery"></div>
-<button type="button" class="secondary no-print" onclick="addMachine()">Añadir maquinaria / vehículo</button>
+
+<!-- 2. INSTALACIONES DE OBRA -->
+<section class="panel"><h2>2. Instalaciones de obra y casetas</h2><div id="facilityChecks"></div>
+<div class="grid">
+<div><label>Observaciones generales de instalaciones</label><textarea name="facilityObs"></textarea></div>
+<div><label>Gestión de residuos y exteriores</label><textarea name="residuosObs" placeholder="Contenedores, prendas ignífugas, etc."></textarea></div>
+<div class="full"><label>Fotografías de instalaciones de obra</label><input class="no-print" type="file" accept="image/*" multiple onchange="addPhotos(this,'photos_facilities')"><div class="photos" id="photos_facilities"></div></div>
+</div></section>
+
+<!-- 3. MEDIOS DE TRABAJO -->
+<section class="panel"><h2>3. Medios de trabajo</h2><div id="mediosChecks"></div>
+<div id="customMedios"></div>
+<button type="button" class="secondary no-print" onclick="addCustomItem('customMedios','Medio de trabajo')">+ Añadir otro medio de trabajo</button>
 </section>
-<section class="panel"><h2>23. Herramientas manuales</h2>
-<p class="small">Revisar selección, estado, mantenimiento, transporte y almacenamiento seguro.</p>
-<div id="toolsChecks"></div>
-<div class="grid"><div><label>Otras herramientas / equipos observados</label><textarea name="toolsOther"></textarea></div><div><label>Observaciones generales</label><textarea name="toolsObs"></textarea></div>
-<div class="full"><label>Fotografías de herramientas</label><input class="no-print" type="file" accept="image/*" multiple onchange="addPhotos(this,'photos_tools')"><div class="photos" id="photos_tools"></div></div></div>
+
+<!-- 4. INSTALACIONES AUXILIARES -->
+<section class="panel"><h2>4. Instalaciones auxiliares</h2><div id="auxChecks"></div>
+<div id="customAux"></div>
+<button type="button" class="secondary no-print" onclick="addCustomItem('customAux','Instalación auxiliar')">+ Añadir otra instalación auxiliar</button>
 </section>
-<section class="panel"><h2>24. Instalaciones anexas y zonas auxiliares</h2>
-<p class="small">Comprobar condiciones de uso, orden, limpieza, señalización y mantenimiento.</p>
-<div id="facilityChecks"></div>
-<div class="grid"><div><label>Otras instalaciones / zonas</label><textarea name="facilityOther"></textarea></div><div><label>Observaciones generales</label><textarea name="facilityObs"></textarea></div>
-<div class="full"><label>Fotografías de instalaciones</label><input class="no-print" type="file" accept="image/*" multiple onchange="addPhotos(this,'photos_facilities')"><div class="photos" id="photos_facilities"></div></div></div>
+
+<!-- 5. MAQUINARIA AUXILIAR -->
+<section class="panel"><h2>5. Maquinaria auxiliar</h2><div id="maqAuxChecks"></div>
+<div id="customMaqAux"></div>
+<button type="button" class="secondary no-print" onclick="addCustomItem('customMaqAux','Maquinaria auxiliar')">+ Añadir otra maquinaria auxiliar</button>
 </section>
-<section class="panel"><h2>25. Comprobaciones específicas de trabajos forestales</h2><div id="forestChecks"></div>
-<div class="grid"><div><label>Condiciones meteorológicas / temperatura / viento</label><textarea name="forestWeather"></textarea></div><div><label>Accesos, evacuación y punto de encuentro</label><textarea name="forestAccess"></textarea></div>
-<div class="full"><label>Observaciones específicas de trabajos forestales</label><textarea name="forestObs"></textarea></div>
-<div class="full"><label>Fotografías de trabajos forestales</label><input class="no-print" type="file" accept="image/*" multiple onchange="addPhotos(this,'photos_forest')"><div class="photos" id="photos_forest"></div></div></div>
+
+<!-- 6. PEQUEÑA MAQUINARIA -->
+<section class="panel"><h2>6. Pequeña maquinaria y herramientas forestales</h2><div id="peqMaqChecks"></div>
+<div id="customPeqMaq"></div>
+<button type="button" class="secondary no-print" onclick="addCustomItem('customPeqMaq','Pequeña maquinaria')">+ Añadir otra pequeña maquinaria</button>
 </section>
-<section class="panel"><h2>26. Observaciones generales y firma</h2><label>Observaciones</label><textarea name="observaciones"></textarea><div class="grid"><div><label>Nombre del técnico responsable</label><input name="firma"></div><div><label>Fecha de firma</label><input name="fechaFirma" type="date"></div></div></section>
-<section class="panel"><h2>Registro de deficiencias y medidas correctoras</h2><p class="small">Añade una línea por cada deficiencia detectada. Adjunta fotografías en el apartado correspondiente.</p><div id="actions"></div><button type="button" class="secondary no-print" onclick="addAction()">Añadir deficiencia / medida</button></section>
+
+<!-- 7. MAQUINARIA AUTOPROPULSADA -->
+<section class="panel"><h2>7. Fichas de maquinaria autopropulsada</h2>
+<p class="small">Completa una ficha individualizada de chequeo de seguridad por cada máquina autopropulsada presente.</p>
+<div id="autoMachinery"></div>
+<button type="button" class="secondary no-print" onclick="addAutoMachine()">+ Añadir ficha de maquinaria autopropulsada</button>
+</section>
+
+<!-- 8. DOCUMENTACIÓN Y ADJUNTOS PDF -->
+<section class="panel"><h2>8. Documentos adjuntos (PDFs)</h2>
+<p class="small">Puedes incorporar archivos PDF complementarios a esta inspección.</p>
+<input class="no-print" type="file" accept="application/pdf" multiple onchange="addPDFs(this)">
+<div id="pdfList" class="doc-list"></div>
+</section>
+
+<!-- 9. CONCLUSIONES Y FIRMA -->
+<section class="panel"><h2>9. Conclusiones y firma</h2>
+<label>Observaciones / Conclusiones del informe</label><textarea name="conclusiones" style="min-height:110px;"></textarea>
+<div class="grid">
+<div><label>Firma / Nombre del técnico responsable</label><input name="firma"></div>
+<div><label>Fecha de firma</label><input name="fechaFirma" type="date"></div>
+</div></section>
+
+<!-- 10. REGISTRO DE DEFICIENCIAS Y MEDIDAS CORRECTORAS -->
+<section class="panel"><h2>10. Deficiencias detectadas y medidas correctoras</h2>
+<div id="actions"></div>
+<button type="button" class="secondary no-print" onclick="addAction()">+ Añadir deficiencia / medida correctora</button>
+</section>
+
 </form>
 </main>
+
 <script>
-const names=[
-"Señalización y balizamiento","Evaluación de riesgos y PSYS","Coordinación de seguridad","Libro de incidencias",
-"Subcontratación y CAE","Instalaciones de bienestar","Emergencias","Orden y limpieza","Almacenamiento y acopios",
-"Instalaciones y medios de trabajo","Equipos y accesorios","Maquinaria auxiliar","Maquinaria autopropulsada",
-"Pequeña maquinaria","Equipos de protección individual","Formación e información","Accidentes e incidentes (verificación)",
-"Deficiencias detectadas","Medidas correctoras y seguimiento"
-];
-const root=document.getElementById('sections');
-names.forEach((n,i)=>{let num=i+2;let d=document.createElement('section');d.className='panel';d.innerHTML=`<h2>${num}. ${n}</h2><div class="item"><div class="grid"><div><label>Evaluación</label><select name="s${num}_estado"><option value="">Seleccionar</option><option>CORRECTO</option><option>MEJORABLE</option><option>DEFICIENTE</option><option>NO APLICA</option></select></div><div><label>Elemento / zona revisada</label><input name="s${num}_elemento"></div><div class="full"><label>Observaciones</label><textarea name="s${num}_obs"></textarea></div><div class="full"><label>Fotografías</label><input class="no-print" type="file" accept="image/*" multiple onchange="addPhotos(this,'photos${num}')"><div class="photos" id="photos${num}"></div></div></div></div>`;root.appendChild(d)});
-const toolItems=["Hachas, podones, machetes y serruchos","Tijeras de poda y pértigas","Herramientas de corte y golpeo","Estado de mangos, hojas, filos y uniones","Protecciones y resguardos cuando proceda","Transporte y almacenamiento seguro","Herramientas defectuosas retiradas de uso"];
-const facilityItems=["Casetas, oficinas y vestuarios","Aseos y zonas de descanso","Comedores y zonas de reunión","Almacenes y depósitos de combustible","Instalación eléctrica y grupos electrógenos","Botiquín y medios de primeros auxilios","Extintores y medios de emergencia","Señalización, orden y limpieza"];
-const forestItems=["Motosierra: estado, mantenimiento y dispositivos de seguridad","Desbrozadora: estado, protector y cabezal/disco adecuado","Apeo y tala: zona de caída, distancias y procedimiento seguro","Poda y trabajos en altura: método y medios adecuados","Maquinaria forestal: estabilidad, protecciones y operador autorizado","Pendientes, terreno irregular, piedras y riesgo de vuelco","Distancias de seguridad entre trabajadores y equipos","Riesgo de incendio: prevención, vigilancia y medios disponibles","Comunicaciones: cobertura, teléfonos y contacto de emergencia","EPIs: casco, pantalla, protección auditiva, ocular, guantes y botas","Hidratación, pausas, calor, frío y condiciones ambientales","Primeros auxilios, evacuación y acceso de emergencias"];
-function buildChecks(id,items,prefix){const box=document.getElementById(id);items.forEach((label,i)=>{const row=document.createElement('div');row.className='check-row';row.innerHTML=`<label>${label}</label><select name="${prefix}_${i}_estado"><option value="">Seleccionar</option><option>CORRECTO</option><option>MEJORABLE</option><option>DEFICIENTE</option><option>NO APLICA</option></select><input name="${prefix}_${i}_obs" placeholder="Observaciones / detalle">`;box.appendChild(row)})}
-buildChecks('toolsChecks',toolItems,'tool');buildChecks('facilityChecks',facilityItems,'facility');buildChecks('forestChecks',forestItems,'forest');
-function addMachine(data={}){const d=document.createElement('div');d.className='machine-row';d.innerHTML=`<div><label>Tipo de máquina / vehículo</label><input class="m-type" placeholder="Motosierra, tractor..."></div><div><label>Marca / modelo</label><input class="m-model"></div><div><label>Matrícula / Nº identificación</label><input class="m-id"></div><div><label>Estado / revisión / observaciones</label><input class="m-state"></div><div class="machine-delete no-print"><label>&nbsp;</label><button type="button" class="danger" onclick="this.closest('.machine-row').remove()">Eliminar</button></div>`;document.getElementById('machinery').appendChild(d);d.querySelector('.m-type').value=data.type||'';d.querySelector('.m-model').value=data.model||'';d.querySelector('.m-id').value=data.id||'';d.querySelector('.m-state').value=data.state||''}
-function addPhotos(inp,id){const box=document.getElementById(id);[...inp.files].forEach(f=>{const r=new FileReader();r.onload=()=>{const img=document.createElement('img');img.src=r.result;img.dataset.photo='1';box.appendChild(img)};r.readAsDataURL(f)});inp.value=''}
-function getGPS(){const status=document.getElementById('gpsStatus');if(!navigator.geolocation){status.textContent='Este navegador no permite obtener la ubicación GPS.';return}status.textContent='Obteniendo ubicación…';navigator.geolocation.getCurrentPosition(pos=>{const lat=pos.coords.latitude.toFixed(6),lon=pos.coords.longitude.toFixed(6);document.getElementById('gpsLat').value=lat;document.getElementById('gpsLon').value=lon;status.textContent='Ubicación GPS capturada.';updateMapLink()},err=>{status.textContent=err.code===1?'Permiso de ubicación denegado. Autorízalo en el navegador.':'No se pudo obtener la ubicación. Comprueba el GPS y vuelve a intentarlo.'},{enableHighAccuracy:true,timeout:15000,maximumAge:0})}
-function updateMapLink(){const lat=document.getElementById('gpsLat').value,lon=document.getElementById('gpsLon').value;const box=document.getElementById('mapLink');box.innerHTML='';if(lat&&lon){const a=document.createElement('a');a.href=`https://www.google.com/maps?q=${encodeURIComponent(lat+','+lon)}`;a.target='_blank';a.rel='noopener';a.textContent='Abrir ubicación en Google Maps';box.appendChild(a)}}
-document.getElementById('gpsLat').addEventListener('input',updateMapLink);document.getElementById('gpsLon').addEventListener('input',updateMapLink);
-function addAction(data={}){const d=document.createElement('div');d.className='item action';d.innerHTML=`<div class="grid"><div><label>Deficiencia detectada</label><textarea class="a-def"></textarea></div><div><label>Medida correctora</label><textarea class="a-med"></textarea></div><div><label>Responsable</label><input class="a-res"></div><div><label>Fecha límite</label><input class="a-date" type="date"></div><div><label>Estado</label><select class="a-state"><option>PENDIENTE</option><option>EN CURSO</option><option>SUBSANADA</option></select></div><div class="no-print"><label>&nbsp;</label><button type="button" class="danger" onclick="this.closest('.action').remove()">Eliminar línea</button></div></div>`;document.getElementById('actions').appendChild(d);d.querySelector('.a-def').value=data.def||'';d.querySelector('.a-med').value=data.med||'';d.querySelector('.a-res').value=data.res||'';d.querySelector('.a-date').value=data.date||'';d.querySelector('.a-state').value=data.state||'PENDIENTE'}
-function getData(){const f=document.getElementById('inspection');const data={fields:{},photos:{},actions:[],machinery:[]};new FormData(f).forEach((v,k)=>data.fields[k]=v);document.querySelectorAll('.photos').forEach(box=>data.photos[box.id]=[...box.querySelectorAll('img')].map(x=>x.src));document.querySelectorAll('.action').forEach(d=>data.actions.push({def:d.querySelector('.a-def').value,med:d.querySelector('.a-med').value,res:d.querySelector('.a-res').value,date:d.querySelector('.a-date').value,state:d.querySelector('.a-state').value}));document.querySelectorAll('.machine-row').forEach(d=>data.machinery.push({type:d.querySelector('.m-type').value,model:d.querySelector('.m-model').value,id:d.querySelector('.m-id').value,state:d.querySelector('.m-state').value}));return data}
-function setData(data){document.getElementById('inspection').reset();Object.entries(data.fields||{}).forEach(([k,v])=>{const el=document.querySelector(`[name="${CSS.escape(k)}"]`);if(el)el.value=v});document.querySelectorAll('.photos').forEach(x=>x.innerHTML='');Object.entries(data.photos||{}).forEach(([id,arr])=>{const box=document.getElementById(id);if(box)arr.forEach(src=>{const im=document.createElement('img');im.src=src;box.appendChild(im)})});document.getElementById('actions').innerHTML='';(data.actions||[]).forEach(addAction);document.getElementById('machinery').innerHTML='';(data.machinery||[]).forEach(addMachine);updateMapLink()}
-function saveInspection(){const data=getData();const key=(data.fields.codigo||'SIN-CODIGO')+'_'+(data.fields.fecha||new Date().toISOString().slice(0,10));let all=JSON.parse(localStorage.getItem('obrareports')||'{}');all[key]=data;try{localStorage.setItem('obrareports',JSON.stringify(all));document.getElementById('msg').textContent='Inspección guardada en este dispositivo.'}catch(e){document.getElementById('msg').textContent='No hay espacio suficiente. Reduce el tamaño o número de fotografías.'}}
-function showSaved(){const p=document.getElementById('savedPanel');p.hidden=!p.hidden;if(!p.hidden){const all=JSON.parse(localStorage.getItem('obrareports')||'{}');const box=document.getElementById('savedList');box.innerHTML='';Object.keys(all).forEach(k=>{const b=document.createElement('button');b.className='secondary';b.textContent='Abrir '+k;b.onclick=()=>setData(all[k]);box.appendChild(b)})}}
-function newInspection(){if(confirm('¿Empezar una inspección nueva? Guarda antes los cambios si los necesitas.')){document.getElementById('inspection').reset();document.querySelectorAll('.photos').forEach(x=>x.innerHTML='');document.getElementById('actions').innerHTML='';document.getElementById('machinery').innerHTML='';addAction();addMachine();document.getElementById('msg').textContent='Nueva inspección.';document.getElementById('gpsStatus').textContent='Pulsa el botón para capturar la posición del dispositivo.';updateMapLink()}}
-addAction();addMachine();document.querySelector('[name=fecha]').value=new Date().toISOString().slice(0,10);
+const facilityItems=["Caseta Comedor","Caseta Vestuarios","Taquillas (separación ropa limpia/sucia)","Caseta Aseos y Duchas","Orden y limpieza general","Botiquines de primeros auxilios","Extintores y medios de emergencia","Señalización de seguridad"];
+const mediosItems=["Instalaciones eléctricas y cuadros","Soldaduras acetilénicas","Compresores","Generadores / Grupos electrógenos"];
+const auxItems=["Escaleras manuales","Andamios y plataformas","Eslingas, ganchos y accesorios de elevación"];
+const maqAuxItems=["Taladradoras","Radiales / Amoladoras","Cortadoras","Vibradores de hormigón"];
+const peqMaqItems=["Motosierras (dispositivos de seguridad y freno)","Desbrozadoras (protector y arnés)","Hormigoneras"];
+
+function buildChecks(id,items,prefix){
+  const box=document.getElementById(id);
+  items.forEach((label,i)=>{
+    const row=document.createElement('div');
+    row.className='check-row';
+    row.innerHTML=`<label>${label}</label><select name="${prefix}_${i}_estado"><option value="">Seleccionar</option><option>CORRECTO</option><option>MEJORABLE</option><option>DEFICIENTE</option><option>NO APLICA</option></select><input name="${prefix}_${i}_obs" placeholder="Observaciones / detalles">`;
+    box.appendChild(row);
+  });
+}
+buildChecks('facilityChecks',facilityItems,'fac');
+buildChecks('mediosChecks',mediosItems,'med');
+buildChecks('auxChecks',auxItems,'aux');
+buildChecks('maqAuxChecks',maqAuxItems,'maux');
+buildChecks('peqMaqChecks',peqMaqItems,'pmaq');
+
+function addCustomItem(containerId,title){
+  const box=document.getElementById(containerId);
+  const row=document.createElement('div');
+  row.className='check-row';
+  row.innerHTML=`<input placeholder="Nombre de ${title}..." style="font-weight:600"><select><option value="">Seleccionar</option><option>CORRECTO</option><option>MEJORABLE</option><option>DEFICIENTE</option><option>NO APLICA</option></select><div style="display:flex;gap:4px;"><input placeholder="Observaciones"><button type="button" class="danger no-print btn-del" onclick="this.closest('.check-row').remove()">X</button></div>`;
+  box.appendChild(row);
+}
+
+function addAutoMachine(data={}){
+  const box=document.getElementById('autoMachinery');
+  const d=document.createElement('div');
+  d.className='card-row auto-m-card';
+  d.innerHTML=`
+  <h3>Ficha de Maquinaria Autopropulsada</h3>
+  <div class="grid">
+    <div><label>Tipo de máquina</label><input class="am-type" placeholder="Ej. Retropala, Tractor, Dumper"></div>
+    <div><label>Marca / Modelo</label><input class="am-model"></div>
+    <div><label>Matrícula / Nº Identificación</label><input class="am-id"></div>
+    <div><label>Estado general</label><select class="am-status"><option value="">Seleccionar</option><option>CORRECTO</option><option>DEFICIENTE</option><option>FUERA DE SERVICIO</option></select></div>
+  </div>
+  <h3>Ficha de inspección de seguridad</h3>
+  <div class="grid">
+    <div><label>Cabina de seguridad (ROPS/FOPS)</label><select class="am-cabina"><option value="">Seleccionar</option><option>CORRECTO</option><option>DEFICIENTE</option><option>NO APLICA</option></select></div>
+    <div><label>Estado de la cabina / cristales</label><select class="am-est-cabina"><option value="">Seleccionar</option><option>CORRECTO</option><option>DEFICIENTE</option></select></div>
+    <div><label>Instrumentos de control / cuadro</label><select class="am-cuadro"><option value="">Seleccionar</option><option>CORRECTO</option><option>DEFICIENTE</option></select></div>
+    <div><label>Bocina</label><select class="am-bocina"><option value="">Seleccionar</option><option>CORRECTO</option><option>DEFICIENTE</option></select></div>
+    <div><label>Estado de cubiertas / cadenas</label><select class="am-ruedas"><option value="">Seleccionar</option><option>CORRECTO</option><option>DEFICIENTE</option></select></div>
+    <div><label>Nivel de ruido / insonorización</label><select class="am-ruido"><option value="">Seleccionar</option><option>CORRECTO</option><option>MEJORABLE</option></select></div>
+    <div><label>Cinturón de seguridad</label><select class="am-cinturon"><option value="">Seleccionar</option><option>CORRECTO</option><option>DEFICIENTE</option></select></div>
+    <div><label>Señal acústica de marcha atrás</label><select class="am-acustica"><option value="">Seleccionar</option><option>CORRECTO</option><option>DEFICIENTE</option></select></div>
+    <div><label>Iluminación / Faros</label><select class="am-luces"><option value="">Seleccionar</option><option>CORRECTO</option><option>DEFICIENTE</option></select></div>
+    <div><label>Extintor portátil</label><select class="am-extintor"><option value="">Seleccionar</option><option>CORRECTO</option><option>DEFICIENTE</option></select></div>
+    <div><label>Botiquín</label><select class="am-botiquin"><option value="">Seleccionar</option><option>CORRECTO</option><option>DEFICIENTE</option></select></div>
+    <div><label>Manual del operador presente</label><select class="am-manual"><option value="">Seleccionar</option><option>SI</option><option>NO</option></select></div>
+  </div>
+  <div class="no-print" style="margin-top:10px;text-align:right;"><button type="button" class="danger" onclick="this.closest('.auto-m-card').remove()">Eliminar esta ficha</button></div>
+  `;
+  box.appendChild(d);
+}
+
+function addPhotos(inp,id){
+  const box=document.getElementById(id);
+  [...inp.files].forEach(f=>{
+    const r=new FileReader();
+    r.onload=()=>{
+      const img=document.createElement('img');
+      img.src=r.result;
+      box.appendChild(img);
+    };
+    r.readAsDataURL(f);
+  });
+  inp.value='';
+}
+
+let loadedPDFs=[];
+function addPDFs(inp){
+  const list=document.getElementById('pdfList');
+  [...inp.files].forEach(f=>{
+    const r=new FileReader();
+    r.onload=()=>{
+      loadedPDFs.push({name:f.name,data:r.result});
+      renderPDFList();
+    };
+    r.readAsDataURL(f);
+  });
+  inp.value='';
+}
+function renderPDFList(){
+  const list=document.getElementById('pdfList');
+  list.innerHTML='';
+  loadedPDFs.forEach((pdf,idx)=>{
+    const item=document.createElement('div');
+    item.className='doc-item';
+    item.innerHTML=`<span>📄 <strong>${pdf.name}</strong></span> <a href="${pdf.data}" target="_blank" class="no-print">Ver / Descargar</a> <button type="button" class="danger no-print btn-del" onclick="loadedPDFs.splice(${idx},1);renderPDFList();">Eliminar</button>`;
+    list.appendChild(item);
+  });
+}
+
+function getGPS(){
+  const status=document.getElementById('gpsStatus');
+  if(!navigator.geolocation){status.textContent='Ubicación GPS no soportada.';return}
+  status.textContent='Obteniendo coordenadas…';
+  navigator.geolocation.getCurrentPosition(pos=>{
+    const lat=pos.coords.latitude.toFixed(6),lon=pos.coords.longitude.toFixed(6);
+    document.getElementById('gpsLat').value=lat;
+    document.getElementById('gpsLon').value=lon;
+    status.textContent='Ubicación GPS capturada.';
+    updateMapLink();
+  },err=>{status.textContent='Error al capturar ubicación.'},{enableHighAccuracy:true,timeout:15000});
+}
+function updateMapLink(){
+  const lat=document.getElementById('gpsLat').value,lon=document.getElementById('gpsLon').value;
+  const box=document.getElementById('mapLink');
+  box.innerHTML='';
+  if(lat&&lon){
+    const a=document.createElement('a');
+    a.href=`https://www.google.com/maps?q=${encodeURIComponent(lat+','+lon)}`;
+    a.target='_blank';a.textContent='Ver posición en Google Maps';
+    box.appendChild(a);
+  }
+}
+document.getElementById('gpsLat').addEventListener('input',updateMapLink);
+document.getElementById('gpsLon').addEventListener('input',updateMapLink);
+
+function addAction(data={}){
+  const d=document.createElement('div');
+  d.className='item action';
+  d.innerHTML=`<div class="grid"><div><label>Deficiencia detectada</label><textarea class="a-def"></textarea></div><div><label>Medida correctora</label><textarea class="a-med"></textarea></div><div><label>Responsable</label><input class="a-res"></div><div><label>Fecha límite</label><input class="a-date" type="date"></div><div><label>Estado</label><select class="a-state"><option>PENDIENTE</option><option>EN CURSO</option><option>SUBSANADA</option></select></div><div class="no-print"><label>&nbsp;</label><button type="button" class="danger" onclick="this.closest('.action').remove()">Eliminar deficiencia</button></div></div>`;
+  document.getElementById('actions').appendChild(d);
+}
+
+function getData(){
+  const f=document.getElementById('inspection');
+  const data={fields:{},photos:{},actions:[],pdfs:loadedPDFs,autoMachinery:[]};
+  new FormData(f).forEach((v,k)=>data.fields[k]=v);
+  document.querySelectorAll('.photos').forEach(box=>data.photos[box.id]=[...box.querySelectorAll('img')].map(x=>x.src));
+  document.querySelectorAll('.action').forEach(d=>data.actions.push({def:d.querySelector('.a-def').value,med:d.querySelector('.a-med').value,res:d.querySelector('.a-res').value,date:d.querySelector('.a-date').value,state:d.querySelector('.a-state').value}));
+  document.querySelectorAll('.auto-m-card').forEach(d=>data.autoMachinery.push({
+    type:d.querySelector('.am-type').value,model:d.querySelector('.am-model').value,id:d.querySelector('.am-id').value,status:d.querySelector('.am-status').value,
+    cabina:d.querySelector('.am-cabina').value,estCabina:d.querySelector('.am-est-cabina').value,cuadro:d.querySelector('.am-cuadro').value,bocina:d.querySelector('.am-bocina').value,
+    ruedas:d.querySelector('.am-ruedas').value,ruido:d.querySelector('.am-ruido').value,cinturon:d.querySelector('.am-cinturon').value,acustica:d.querySelector('.am-acustica').value,
+    luces:d.querySelector('.am-luces').value,extintor:d.querySelector('.am-extintor').value,botiquin:d.querySelector('.am-botiquin').value,manual:d.querySelector('.am-manual').value
+  }));
+  return data;
+}
+
+function setData(data){
+  document.getElementById('inspection').reset();
+  Object.entries(data.fields||{}).forEach(([k,v])=>{const el=document.querySelector(`[name="${CSS.escape(k)}"]`);if(el)el.value=v});
+  document.querySelectorAll('.photos').forEach(x=>x.innerHTML='');
+  Object.entries(data.photos||{}).forEach(([id,arr])=>{const box=document.getElementById(id);if(box)arr.forEach(src=>{const im=document.createElement('img');im.src=src;box.appendChild(im)})});
+  loadedPDFs=data.pdfs||[];renderPDFList();
+  document.getElementById('actions').innerHTML='';(data.actions||[]).forEach(addAction);
+  document.getElementById('autoMachinery').innerHTML='';(data.autoMachinery||[]).forEach(addAutoMachine);
+  updateMapLink();
+}
+
+function saveInspection(){
+  const data=getData();
+  const key=(data.fields.codigo||'SIN-CODIGO')+'_'+(data.fields.fechaFirma||new Date().toISOString().slice(0,10));
+  let all=JSON.parse(localStorage.getItem('obrareports_v2')||'{}');
+  all[key]=data;
+  try{
+    localStorage.setItem('obrareports_v2',JSON.stringify(all));
+    document.getElementById('msg').textContent='Inspección guardada correctamente.';
+  }catch(e){
+    document.getElementById('msg').textContent='Atención: Archivos muy pesados para la memoria local.';
+  }
+}
+
+function showSaved(){
+  const p=document.getElementById('savedPanel');
+  p.hidden=!p.hidden;
+  if(!p.hidden){
+    const all=JSON.parse(localStorage.getItem('obrareports_v2')||'{}');
+    const box=document.getElementById('savedList');
+    box.innerHTML='';
+    Object.keys(all).forEach(k=>{
+      const b=document.createElement('button');
+      b.className='secondary';b.textContent='Abrir '+k;
+      b.onclick=()=>setData(all[k]);
+      box.appendChild(b);
+    });
+  }
+}
+
+function newInspection(){
+  if(confirm('¿Deseas iniciar una nueva inspección en blanco?')){
+    document.getElementById('inspection').reset();
+    document.querySelectorAll('.photos').forEach(x=>x.innerHTML='');
+    document.getElementById('actions').innerHTML='';
+    document.getElementById('autoMachinery').innerHTML='';
+    loadedPDFs=[];renderPDFList();
+    document.getElementById('msg').textContent='Nueva inspección lista.';
+    updateMapLink();
+  }
+}
+
+document.querySelector('[name=fechaFirma]').value=new Date().toISOString().slice(0,10);
 </script>
-</body></html>
+</body>
+</html>
