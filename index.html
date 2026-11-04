@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Check-List Recepción de Maquinaria - Grupo TRAGSA</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
+</head>
+<body class="bg-slate-100 text-slate-800 font-sans antialiased min-h-screen flex flex-col">
+
+    <!-- Header Corporativo -->
+    <header class="bg-slate-900 text-white shadow-md sticky top-0 z-50">
+        <div class="max-w-6xl mx-auto px-4 py-3 flex flex-col sm:flex-row justify-between items-center gap-3">
+            <div class="flex items-center space-x-3">
+                <div class="bg-white px-3 py-1 rounded shadow flex items-center">
+                    <span class="font-black text-xl tracking-tighter" style="color: #16a34a;">Tragsa</span>
+                </div>
+                <div>
+                    <h1 class="text-base font-bold tracking-wide">CHECK-LIST RECEPCIÓN DE MAQUINARIA</h1>
+                    <p class="text-xs text-slate-400">Prevención de Riesgos Laborales y Control de Equipos</p>
+                </div>
+            </div>
+            <div class="flex items-center space-x-2">
+                <button onclick="guardarBorrador()" class="bg-slate-800 hover:bg-slate-700 text-slate-200 text-xs px-3 py-2 rounded border border-slate-700 transition flex items-center gap-1.5">
+                    <i class="fa-solid fa-floppy-disk text-emerald-400"></i> Guardar Borrador
+                </button>
+                <button onclick="limpiarFormulario()" class="bg-red-900/40 hover:bg-red-900/60 text-red-300 text-xs px-3 py-2 rounded border border-red-800 transition flex items-center gap-1.5">
+                    <i class="fa-solid fa-rotate-right"></i> Limpiar
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <!-- Contenedor Principal -->
+    <main class="max-w-6xl w-full mx-auto px-4 py-6 flex-grow">
+        <form id="checklistForm" class="space-y-6 bg-white p-6 rounded-xl shadow-sm border border-slate-200">
+            
+            <div class="flex justify-between items-center border-b pb-4 mb-4">
+                <div>
+                    <h2 class="text-xl font-bold text-slate-900 uppercase">Check-List Recepción de Maquinaria</h2>
+                    <p class="text-xs text-slate-500 font-semibold">GRUPO TRAGSA - SISTEMA DE GESTIÓN PRL</p>
+                </div>
+                <span class="bg-slate-100 text-slate-700 text-xs px-3 py-1 rounded font-mono font-bold border">MOD-PRL-MAQ</span>
+            </div>
+
+            <!-- 1. DATOS IDENTIFICATIVOS -->
+            <section class="space-y-3">
+                <h3 class="text-sm font-bold text-slate-800 border-b pb-1 uppercase flex items-center gap-2">
+                    <i class="fa-solid fa-truck-monster text-emerald-600"></i> Datos Identificativos de la Máquina
+                </h3>
+                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3">
+                    <div>
+                        <label class="block text-xs font-semibold text-slate-700 mb-1">Tipo de Máquina</label>
+                        <input type="text" id="tipoMaquina" class="w-full text-xs border rounded p-2 focus:ring-2 focus:ring-emerald-500 outline-none" placeholder="Ej: Tractor Valtra T155">
+                    </div>
+                    <div>
+                        <label class="block text-xs font-semibold text-slate-700 mb-1">Nº TRAGSA</label>
+                        <input type="text" id="numTragsa" class="w-full text-xs border rounded p-2 focus:ring-2 focus:ring-emerald-500 outline-none" placeholder="Ej: 812699">
+                    </div>
+                    <div>
+                        <label class="block text-xs font-semibold text-slate-700 mb-1">Marca / Modelo</label>
+                        <input type="text" id="marcaModelo" class="w-full text-xs border rounded p-2 focus:ring-2 focus:ring-emerald-500 outline-none" placeholder="Ej: Valtra / T155">
+                    </div>
+                    <div>
+                        <label class="block text-xs font-semibold text-slate-700 mb-1">Matrícula</label>
+                        <input type="text" id="matricula" class="w-full text-xs border rounded p-2 focus:ring-2 focus:ring-emerald-500 outline-none" placeholder="Ej: E-9980-BHS">
+                    </div>
+                    <div>
+                        <label class="block text-xs font-semibold text-slate-700 mb-1">Nº Bastidor</label>
+                        <input type="text" id="numBastidor" class="w-full text-xs border rounded p-2 focus:ring-2 focus:ring-emerald-500 outline-none" placeholder="Ej: YK5T155AONS244014">
+                    </div>
+                    <div>
+                        <label class="block text-xs font-semibold text-slate-700 mb-1">Cuentahoras (h)</label>
+                        <input type="number" id="cuentahoras" class="w-full text-xs border rounded p-2 focus:ring-2 focus:ring-emerald-500 outline-none" placeholder="Ej: 3072">
+                    </div>
+                    <div>
+                        <label class="block text-xs font-semibold text-slate-700 mb-1">Procedencia</label>
+                        <input type="text" id="procedencia" class="w-full text-xs border rounded p-2 focus:ring-2 focus:ring-emerald-500 outline-none" placeholder="Ej: Valdespino">
+                    </div>
+                    <div>
+                        <label class="block text-xs font-semibold text-slate-700 mb-1">Obra Destino</label>
+                        <input type="text" id="obraDestino" class="w-full text-xs border rounded p-2 focus:ring-2 focus:ring-emerald-500 outline-none" placeholder="Ej: Obra Militar">
+                    </div>
+                </div>
+            </section>
+
+            <!-- 2. TABLA DE PUNTOS A CHEQUEAR -->
+            <section class="space-y-3">
+                <h3 class="text-sm font-bold text-slate-800 border-b pb-1 uppercase flex items-center gap-2">
+                    <i class="fa-solid fa-clipboard-check text-emerald-600"></i> Puntos de Chequeo Técnico
+                </h3>
+                <div class="overflow-x-auto">
+                    <table class="w-full text-left border-collapse border border-slate-200">
+                        <thead>
+                            <tr class="bg-slate-100 text-slate-700 text-xs uppercase font-bold">
+                                <th class="p-2 border w-2/5">Concepto a Chequear</th>
+                                <th class="p-2 border w-1/5 text-center">Estado</th>
+                                <th class="p-2 border w-2/5">Observaciones / Foto</th>
+                            </tr>
+                        </thead>
+                        <tbody id="tablaChequeo" class="text-xs divide-y"></tbody>
+                    </table>
+                </div>
+            </section>
+
+            <!-- 3. OBSERVACIONES -->
+            <section class="space-y-3">
+                <h3 class="text-sm font-bold text-slate-800 border-b pb-1 uppercase flex items-center gap-2">
+                    <i class="fa-solid fa-comment-dots text-emerald-600"></i> Observaciones Generales
+                </h3>
+                <textarea id="observacionesGenerales" rows="3" class="w-full text-xs border rounded p-2 focus:ring-2 focus:ring-emerald-500 outline-none" placeholder="Deficiencias detectadas, revisiones pendientes..."></textarea>
+            </section>
+
+            <!-- 4. FIRMAS -->
+            <section class="space-y-3">
+                <h3 class="text-sm font-bold text-slate-800 border-b pb-1 uppercase flex items-center gap-2">
+                    <i class="fa-solid fa-signature text-emerald-600"></i> Personal e Identificación
+                </h3>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    <div class="border p-3 rounded bg-slate-50">
+                        <label class="block text-xs font-bold text-slate-700 mb-1">Realiza el Check-list (TRAGSA)</label>
+                        <input type="text" id="realizaNombre" class="w-full text-xs border rounded p-2 bg-white" placeholder="Nombre, Apellidos y DNI">
+                    </div>
+                    <div class="border p-3 rounded bg-slate-50">
+                        <label class="block text-xs font-bold text-slate-700 mb-1">Conforme con el Check-list</label>
+                        <input type="text" id="conformeNombre" class="w-full text-xs border rounded p-2 bg-white" placeholder="Nombre, Apellidos y DNI">
+                    </div>
+                </div>
+            </section>
+
+            <!-- Botón PDF -->
+            <div class="flex justify-end pt-4 border-t">
+                <button type="button" onclick="generarPDF()" class="bg-red-700 hover:bg-red-800 text-white font-medium px-6 py-3 rounded shadow transition flex items-center gap-2 text-sm">
+                    <i class="fa-solid fa-file-pdf text-lg"></i> Exportar Check-List en PDF
+                </button>
+            </div>
+        </form>
+    </main>
+
+    <script>
+        const conceptos = [
+            "LUZ ROTATIVA", "CINTURÓN DE SEGURIDAD", "ESPEJOS RETROVISORES", "ALARMA ACÚSTICA DE MARCHA ATRÁS",
+            "BOCINA - CLAXON", "EMISORA", "EXTINTOR", "ESTADO INTERIOR DE LA CABINA", "ESTADO DE LUNAS Y CRISTALES",
+            "GOLPES Y ABOLLADURAS", "FUNCIONAMIENTO DE TODOS LOS TESTIGOS DEL CUADRO", "FUNCIONAMIENTO DE CONTROLES DE OPERACIÓN",
+            "ESTADO DE CUBIERTAS / ORUGAS", "NEUMÁTICO DELANTERO DERECHO", "NEUMÁTICO DELANTERO IZQUIERDO",
+            "NEUMÁTICO TRASERO DERECHO", "NEUMÁTICO TRASERO IZQUIERDO", "FUNCIONAMIENTO DE LUCES E INDICADORES",
+            "AIRE ACONDICIONADO", "DOCUMENTACIÓN MÁQUINA", "INEXISTENCIA DE PÉRDIDAS DE FLUIDOS",
+            "NIVELES (MOTOR / REFRIGERANTE / HIDRÁULICO)", "DIENTES Y PROTECCIONES DEL CAZO"
+        ];
+
+        function cargarTabla() {
+            const tbody = document.getElementById('tablaChequeo');
+            tbody.innerHTML = '';
+            conceptos.forEach((concepto, index) => {
+                const tr = document.createElement('tr');
+                tr.className = index % 2 === 0 ? 'bg-white' : 'bg-slate-50/50';
+                tr.innerHTML = `
+                    <td class="p-2 border font-medium text-slate-800">${concepto}</td>
+                    <td class="p-2 border text-center">
+                        <select onchange="cambiarColorSelect(this)" class="w-full text-xs border rounded p-1 bg-white font-bold select-estado">
+                            <option value="">-- Seleccionar --</option>
+                            <option value="CORRECTO" class="text-emerald-700 font-bold">CORRECTO</option>
+                            <option value="INCORRECTO" class="text-red-700 font-bold">INCORRECTO</option>
+                            <option value="N/A" class="text-slate-500">N/A</option>
+                        </select>
+                    </td>
+                    <td class="p-2 border">
+                        <div class="flex items-center gap-2 mb-1">
+                            <input type="text" class="flex-grow text-xs border rounded p-1 bg-white" placeholder="Observación...">
+                            <label class="cursor-pointer bg-slate-200 hover:bg-slate-300 text-slate-700 p-1 rounded text-xs transition shrink-0" title="Foto">
+                                <i class="fa-solid fa-camera"></i>
+                                <input type="file" accept="image/*" class="hidden" onchange="adjuntarFotoItem(this)">
+                            </label>
+                        </div>
+                        <div class="galeria-item flex flex-wrap gap-1"></div>
+                    </td>
+                `;
+                tbody.appendChild(tr);
+            });
+        }
+
+        function cambiarColorSelect(select) {
+            select.className = "w-full text-xs border rounded p-1 font-bold select-estado " + 
+                (select.value === 'CORRECTO' ? 'bg-emerald-100 text-emerald-800 border-emerald-400' :
+                 select.value === 'INCORRECTO' ? 'bg-red-100 text-red-800 border-red-400' : 'bg-slate-100 text-slate-600');
+        }
+
+        function adjuntarFotoItem(input) {
+            if (input.files && input.files[0]) {
+                const reader = new FileReader();
+                reader.onload = function(e) {
+                    const galeria = input.closest('td').querySelector('.galeria-item');
+                    const div = document.createElement('div');
+                    div.className = 'relative w-9 h-9 border rounded overflow-hidden shadow-sm inline-block';
+                    div.innerHTML = `<img src="${e.target.result}" class="w-full h-full object-cover"><button type="button" onclick="this.parentElement.remove()" class="absolute top-0 right-0 bg-red-600 text-white rounded-full w-3 h-3 flex items-center justify-center text-[7px]">×</button>`;
+                    galeria.appendChild(div);
+                }
+                reader.readAsDataURL(input.files[0]);
+            }
+        }
+
+        function limpiarFormulario() {
+            if (confirm('¿Limpiar formulario?')) {
+                document.getElementById('checklistForm').reset();
+                document.querySelectorAll('.select-estado').forEach(s => cambiarColorSelect(s));
+                document.querySelectorAll('.galeria-item').forEach(g => g.innerHTML = '');
+            }
+        }
+
+        function guardarBorrador() {
+            alert('¡Check-List guardado en el navegador!');
+        }
+
+        function generarPDF() {
+            const elemento = document.getElementById('checklistForm');
+            const num = document.getElementById('numTragsa').value || 'Maquinaria';
+            html2pdf().from(elemento).set({
+                margin: 8, filename: `CheckList_TRAGSA_${num}.pdf`,
+                image: { type: 'jpeg', quality: 0.98 },
+                html2canvas: { scale: 2, useCORS: true },
+                jsPDF: { unit: 'mm', format: 'a4', orientation: 'portrait' }
+            }).save();
+        }
+
+        document.addEventListener('DOMContentLoaded', cargarTabla);
+    </script>
+</body>
+</html>
