@@ -303,4 +303,166 @@ function getGPS(){
 function updateMapLink(){
   const lat=document.getElementById('gpsLat').value,lon=document.getElementById('gpsLon').value;
   const box=document.getElementById('mapLink');
-  box
+  box.innerHTML='';
+  if(lat&&lon){
+    const a=document.createElement('a');
+    a.href=`https://www.google.com/maps?q=${encodeURIComponent(lat+','+lon)}`;
+    a.target='_blank';a.textContent='Ver posición en Google Maps';
+    box.appendChild(a);
+  }
+}
+document.getElementById('gpsLat').addEventListener('input',updateMapLink);
+document.getElementById('gpsLon').addEventListener('input',updateMapLink);
+
+function addAction(data={}){
+  const rnd=Math.random().toString(36).substring(2,7);
+  const pId=data.photoBoxId||('act_ph_'+rnd);
+  const d=document.createElement('div');
+  d.className='item action';
+  d.innerHTML=`<div class="grid">
+    <div><label>Deficiencia detectada</label><textarea class="a-def">${data.def||''}</textarea></div>
+    <div><label>Medida correctora</label><textarea class="a-med">${data.med||''}</textarea></div>
+    <div><label>Responsable</label><input class="a-res" value="${data.res||''}"></div>
+    <div><label>Fecha límite</label><input class="a-date" type="date" value="${data.date||''}"></div>
+    <div><label>Estado</label><select class="a-state"><option ${data.state==='PENDIENTE'?'selected':''}>PENDIENTE</option><option ${data.state==='EN CURSO'?'selected':''}>EN CURSO</option><option ${data.state==='SUBSANADA'?'selected':''}>SUBSANADA</option></select></div>
+    <div class="no-print"><label>&nbsp;</label><button type="button" class="danger" onclick="this.closest('.action').remove()">Eliminar deficiencia</button></div>
+    <div class="full">
+      <label>Fotografías de la deficiencia</label>
+      <input class="no-print" type="file" accept="image/*" multiple style="max-width:260px;padding:4px;font-size:12px;" onchange="addPhotos(this, '${pId}')">
+      <div class="photos" id="${pId}"></div>
+    </div>
+  </div>`;
+  document.getElementById('actions').appendChild(d);
+  if(data.photos && data.photoBoxId){
+    const pBox=document.getElementById(data.photoBoxId);
+    if(pBox) data.photos.forEach(src=>{
+      const card=document.createElement('div');
+      card.className='photo-card';
+      card.innerHTML=`<img src="${src}"><button type="button" class="no-print" onclick="this.closest('.photo-card').remove()">X</button>`;
+      pBox.appendChild(card);
+    });
+  }
+}
+
+function getData(){
+  const f=document.getElementById('inspection');
+  const data={fields:{},photos:{},actions:[],pdfs:loadedPDFs,autoMachinery:[]};
+  new FormData(f).forEach((v,k)=>data.fields[k]=v);
+
+  document.querySelectorAll('.photos').forEach(box=>{
+    if(box.id) data.photos[box.id]=[...box.querySelectorAll('.photo-card img')].map(x=>x.src);
+  });
+
+  document.querySelectorAll('.action').forEach(d=>{
+    const pBox=d.querySelector('.photos');
+    data.actions.push({
+      def:d.querySelector('.a-def').value,
+      med:d.querySelector('.a-med').value,
+      res:d.querySelector('.a-res').value,
+      date:d.querySelector('.a-date').value,
+      state:d.querySelector('.a-state').value,
+      photoBoxId:pBox?pBox.id:null,
+      photos:pBox?[...pBox.querySelectorAll('.photo-card img')].map(x=>x.src):[]
+    });
+  });
+
+  document.querySelectorAll('.auto-m-card').forEach(d=>{
+    const pBox=d.querySelector('.photos');
+    data.autoMachinery.push({
+      type:d.querySelector('.am-type').value,model:d.querySelector('.am-model').value,id:d.querySelector('.am-id').value,status:d.querySelector('.am-status').value,
+      cabina:d.querySelector('.am-cabina').value,estCabina:d.querySelector('.am-est-cabina').value,cuadro:d.querySelector('.am-cuadro').value,bocina:d.querySelector('.am-bocina').value,
+      ruedas:d.querySelector('.am-ruedas').value,ruido:d.querySelector('.am-ruido').value,cinturon:d.querySelector('.am-cinturon').value,acustica:d.querySelector('.am-acustica').value,
+      luces:d.querySelector('.am-luces').value,extintor:d.querySelector('.am-extintor').value,botiquin:d.querySelector('.am-botiquin').value,manual:d.querySelector('.am-manual').value,
+      photoBoxId:pBox?pBox.id:null,
+      photos:pBox?[...pBox.querySelectorAll('.photo-card img')].map(x=>x.src):[]
+    });
+  });
+  return data;
+}
+
+function setData(data){
+  document.getElementById('inspection').reset();
+  Object.entries(data.fields||{}).forEach(([k,v])=>{const el=document.querySelector(`[name="${CSS.escape(k)}"]`);if(el)el.value=v});
+  
+  document.querySelectorAll('.photos').forEach(x=>x.innerHTML='');
+
+  Object.entries(data.photos||{}).forEach(([id,arr])=>{
+    let box=document.getElementById(id);
+    if(!box){
+      const candidate=document.querySelector(`[onchange*="${id}"]`);
+      if(candidate){
+        box=document.createElement('div');
+        box.id=id; box.className='photos';
+        candidate.parentNode.parentNode.appendChild(box);
+      }
+    }
+    if(box) arr.forEach(src=>{
+      const card=document.createElement('div');
+      card.className='photo-card';
+      card.innerHTML=`<img src="${src}"><button type="button" class="no-print" onclick="this.closest('.photo-card').remove()">X</button>`;
+      box.appendChild(card);
+    });
+  });
+
+  loadedPDFs=data.pdfs||[];renderPDFList();
+  document.getElementById('actions').innerHTML='';(data.actions||[]).forEach(addAction);
+  document.getElementById('autoMachinery').innerHTML='';(data.autoMachinery||[]).forEach(addAutoMachine);
+  updateMapLink();
+}
+
+function saveInspection(){
+  const data=getData();
+  const key=(data.fields.codigo||'SIN-CODIGO')+'_'+(data.fields.fechaFirma||new Date().toISOString().slice(0,10));
+  let all=JSON.parse(localStorage.getItem('obrareports_v2')||'{}');
+  all[key]=data;
+  try{
+    localStorage.setItem('obrareports_v2',JSON.stringify(all));
+    document.getElementById('msg').textContent='Inspección guardada en este dispositivo.';
+  }catch(e){
+    document.getElementById('msg').textContent='Atención: Demasiadas fotos guardadas en la memoria local.';
+  }
+}
+
+function showSaved(){
+  const p=document.getElementById('savedPanel');
+  p.hidden=!p.hidden;
+  if(!p.hidden){
+    const all=JSON.parse(localStorage.getItem('obrareports_v2')||'{}');
+    const box=document.getElementById('savedList');
+    box.innerHTML='';
+    if(Object.keys(all).length === 0){
+      box.innerHTML='<p class="small">No hay inspecciones guardadas todavía en este dispositivo.</p>';
+      return;
+    }
+    Object.keys(all).forEach(k=>{
+      const b=document.createElement('button');
+      b.className='secondary';b.textContent='Abrir '+k;
+      b.onclick=()=>setData(all[k]);
+      box.appendChild(b);
+    });
+  }
+}
+
+function newInspection(){
+  if(confirm('¿Deseas iniciar una nueva inspección en blanco?')){
+    document.getElementById('inspection').reset();
+    document.querySelectorAll('.photos').forEach(x=>x.innerHTML='');
+    document.getElementById('actions').innerHTML='';
+    document.getElementById('autoMachinery').innerHTML='';
+    loadedPDFs=[];renderPDFList();
+    document.getElementById('msg').textContent='Nueva inspección lista.';
+    updateMapLink();
+  }
+}
+
+document.querySelector('[name=fechaFirma]').value=new Date().toISOString().slice(0,10);
+
+// Soporte offline (PWA Service Worker automático)
+if('serviceWorker' in navigator){
+  const swCode = `self.addEventListener('install', e => self.skipWaiting()); self.addEventListener('fetch', e => {});`;
+  const blob = new Blob([swCode], {type: 'text/javascript'});
+  navigator.serviceWorker.register(URL.createObjectURL(blob)).catch(()=>{});
+}
+</script>
+</body>
+</html>
